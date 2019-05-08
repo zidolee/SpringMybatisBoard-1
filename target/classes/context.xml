@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- 1. List 활용  -->
+	<!-- <bean id="collectionBean" class="com.springbook.ioc.injection.CollectionBean">
+		<property name="addressList">
+			<list>
+				<value>서울시 강남구 역삼동</value>
+				<value>서울시 성동구 행당동</value>
+				<value>대구시 북구 침산동</value>
+				<value>대구시 북구 칠성동</value>
+				<value>대구시 수성구 범어동</value>
+			</list>
+		</property>
+	</bean> -->
+	
+	<!--  2. Set 활용 -->
+	<!-- <bean id="collectionBean" class="com.springbook.ioc.injection.CollectionBean">
+		<property name="addressList">
+			<set value-type="java.lang.String">
+				<value>서울시 강남구 역삼동</value>
+				<value>서울시 성동구 행당동</value>
+				<value>대구시 북구 침산동</value>
+				<value>대구시 북구 칠성동</value>
+				<value>대구시 수성구 범어동</value>
+			</set>
+		</property>
+	</bean> -->
+	
+	<!--  3. Map 활용 -->
+	<!-- <bean id="collectionBean" class="com.springbook.ioc.injection.CollectionBean">
+		<property name="addressList">
+			<map value-type="java.lang.String">
+				<props>
+					<prop><value>고길동</value></prop>
+					<value>서울시 강남구 역삼동</value>
+				</props>
+				<props>
+					<prop><value>홍길동</value></prop>
+					<value>서울시 성동구 행당동</value>
+				</props>
+				<props>
+					<prop><value>둘리</value></prop>
+					<value>대구시 북구 침산동</value>
+				</props>
+				<props>
+					<prop><value>진구</value></prop>
+					<value>대구시 북구 칠성동</value>
+				</props>
+				<props>
+					<prop><value>도우너</value></prop>
+					<value>대구시 수성구 범어동</value>
+				</props>
+				
+			</map>
+		</property>
+	</bean> -->
+	<!-- 4. props 활용 -->
+	<bean id="collectionBean" class="com.springbook.ioc.injection.CollectionBean">
+		<property name="addressList">
+				<props>
+					<prop key="고길동">서울시 강남구 역삼동</prop>
+					
+					<prop key="홍길동">서울시 성동구 행당동</prop>
+
+					<prop key="둘리">대구시 북구 침산동</prop>
+
+					<prop key="진구">대구시 북구 칠성동</prop>
+					
+					<prop key="도우너">대구시 수성구 범어동</prop>
+
+				</props>
+
+		</property>
+	</bean>
+</beans>
