@@ -20,8 +20,9 @@ public class UserDAO {
 	private final String USER_GET = "select * from users where id=? and password=?";
 	
 	//회원등록
-	public void insertUser(UserVO vo) {
+	public int insertUser(UserVO vo) {
 		UserVO user = null;
+		int joinCheck = 0;
 		try {
 			System.out.println("===> JDBC로 insertUser() 기능 처리");
 			
@@ -33,12 +34,13 @@ public class UserDAO {
 			stmt.setString(3, vo.getName());
 			stmt.setString(4, vo.getRole());
 			
-			stmt.executeUpdate();
+			joinCheck = stmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			JDBCUtil.close(stmt, conn);
 		}
+		return joinCheck;
 	}
 	
 	//회원 조회
