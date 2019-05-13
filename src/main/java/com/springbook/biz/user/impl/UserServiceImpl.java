@@ -19,8 +19,10 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public void insetUserVO(UserVO vo) {
-		userDAO.insertUser(vo);
+	public int insetUserVO(UserVO vo) {
+		int joinCheck = 0;
+		joinCheck =  userDAO.insertUser(vo);
+		return joinCheck;
 	}
 
 	@Override

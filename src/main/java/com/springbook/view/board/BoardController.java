@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,7 +17,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.springbook.biz.board.BoardListVO;
 import com.springbook.biz.board.BoardService;
 import com.springbook.biz.board.BoardVO;
 
@@ -104,13 +105,20 @@ public class BoardController {
 	
 	
 	@RequestMapping("/getBoardList.do")
-	public String getBoardList(BoardVO vo, Model model) {
+	public String getBoardList(BoardVO vo, Model model, HttpSession session) {
 		System.out.println("글 목록 검색 처리");
+		System.out.println(session.getAttribute("userName"));
+		String auth  = (String)session.getAttribute("userName");
 		
 		// Null Check
 		if(vo.getSearchCondition() == null) vo.setSearchCondition("TITLE");
 		if(vo.getSearchKeyword() == null) vo.setSearchKeyword("");
-		model.addAttribute("boardList", boardService.getBoardList(vo));
-		return "getBoardList.jsp";
+		if(auth == null) {
+			return "redirect:login.do";
+		} else {
+			model.addAttribute("boardList", boardService.getBoardList(vo));
+			return "getBoardList.jsp";
+		}
+		
 	}
 }
