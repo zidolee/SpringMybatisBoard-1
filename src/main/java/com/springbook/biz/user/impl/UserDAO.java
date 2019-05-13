@@ -66,7 +66,7 @@ public class UserDAO {
 				user.setBirthday(rs.getDate("birthday"));
 				user.setHp(rs.getString("hp"));
 				user.setAddress(rs.getString("address"));
-				user.setReg_date(rs.getDate("regdate"));
+				user.setReg_date(rs.getDate("reg_date"));
 
 			}
 		} catch (Exception e) {

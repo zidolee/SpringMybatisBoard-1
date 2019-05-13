@@ -113,7 +113,7 @@ public class BoardController {
 		// Null Check
 		if(vo.getSearchCondition() == null) vo.setSearchCondition("TITLE");
 		if(vo.getSearchKeyword() == null) vo.setSearchKeyword("");
-		if(auth == null) {
+		if(auth == null && auth.equals("")) {
 			return "redirect:login.do";
 		} else {
 			model.addAttribute("boardList", boardService.getBoardList(vo));

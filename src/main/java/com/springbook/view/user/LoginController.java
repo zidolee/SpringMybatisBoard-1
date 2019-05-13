@@ -59,7 +59,7 @@ public class LoginController {
 			session.setAttribute("userName", user.getName());
 			return "redirect:getBoardList.do";
 		} else {
-			return "redirect:login.jsp";
+			return "redirect:login.do";
 		}
 	}
 	
