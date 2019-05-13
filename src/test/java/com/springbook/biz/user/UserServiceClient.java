@@ -18,13 +18,13 @@ public class UserServiceClient {
 		userVo.setId("test3");
 		userVo.setPassword("123");
 		userVo.setName("소농민");
-		userVo.setRole("admin");
+
 		
 //		userService.insetUserVO(userVo);
 		// 4. 사용자 검색(로그인 처리)
 		UserVO user = userService.getUserVO(userVo);
 		if(user != null) {
-			System.out.println(user.getRole() + ": " +  user.getName() + "님 확영합니다.");
+			System.out.println(user.getName() + "님 확영합니다.");
 		} else {
 			System.out.println("로그인 실패");
 		}

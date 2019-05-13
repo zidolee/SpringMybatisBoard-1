@@ -30,8 +30,19 @@ public class UserServiceImpl implements UserService{
 		return userDAO.getUser(vo);
 	}
 
+	@Override
+	public void updateUser(UserVO vo) {
+		
+		
+	}
 
+	@Override
+	public void deleteUser(UserVO vo) {
 
+		
+	}
+
+	
 
 
 }

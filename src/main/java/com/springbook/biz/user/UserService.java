@@ -8,4 +8,10 @@ public interface UserService {
 	//회원 조회
 	UserVO getUserVO(UserVO vo);
 	
+	//회원 수정
+	
+	void updateUser(UserVO vo);
+	
+	void deleteUser(UserVO vo);
+	
 }

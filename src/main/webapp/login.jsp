@@ -22,10 +22,12 @@
 				<tr>
 					<td bgcolor="orange"><spring:message code="message.user.login.password"/></td>
 					<td> <input type="password" name="password" value="${user.password }"></td>
-				</tr>
-					<td colspan="2" align="center">
-					<input type="submit" value="<spring:message code="message.user.login.loginBtn"/>">
+				</tr>	
 				<tr>
+					<td colspan="2" align="center">
+						<input type="submit" value="<spring:message code="message.user.login.loginBtn"/>">
+						<input type="button" onclick="location.href='join.do'" value="<spring:message code="message.user.login.joinBtn"/>" />
+					</td>
 				</tr>
 			</table>
 		</form>
