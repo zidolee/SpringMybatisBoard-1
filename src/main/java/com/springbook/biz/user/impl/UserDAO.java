@@ -18,6 +18,8 @@ public class UserDAO {
 	
 	private final String USER_INSERT = "insert into users values(?, ?, ?, ?, ?, ?, ?, sysdate)";
 	private final String USER_GET = "select * from users where id=? and password=?";
+	private final String USER_UPDATE = "update users set password=?, sex=?, birthday=?, hp=?, address=? where id=?";
+	private final String USER_DELETE = "delete from users where id=?";
 	
 	//회원등록
 	public int insertUser(UserVO vo) {
