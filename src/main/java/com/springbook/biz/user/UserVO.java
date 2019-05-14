@@ -76,4 +76,10 @@ public class UserVO {
 		this.reg_date = reg_date;
 	}
 
+	@Override
+	public String toString() {
+		return "UserVO [id=" + id + ", password=" + password + ", name=" + name + ", sex=" + sex + ", birthday="
+				+ birthday + ", hp=" + hp + ", address=" + address + ", reg_date=" + reg_date + "]";
+	}
+
 }

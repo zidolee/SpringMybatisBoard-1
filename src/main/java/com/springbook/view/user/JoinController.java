@@ -1,5 +1,7 @@
 package com.springbook.view.user;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,10 +18,10 @@ import com.springbook.biz.user.impl.UserDAO;
 public class JoinController {
 	
 	@Autowired
-	UserService userService;
+	private UserService userService;
 	
 	@RequestMapping(value="/join.do", method=RequestMethod.POST)
-	public String jogin(UserVO vo, UserDAO userDAO) {
+	public String jogin(UserVO vo) {
 		System.out.println("회원가입"); 
 		int join = 0;
 		join = userService.insertUserVO(vo);
@@ -31,20 +33,25 @@ public class JoinController {
 	}
 	
 	@RequestMapping(value="/join.do", method=RequestMethod.GET)
-	public String loginView(@ModelAttribute("user") UserVO vo) {
+	public String loginView(UserVO vo) {
 		return "join.jsp";
 	}
 	
-	@RequestMapping("/getUser.do")
-	public String getUser(UserVO vo, Model model) {
-		System.out.println("글 상세 조회 처리");
+	@RequestMapping("/joinInfo.do")
+	public String getUser(UserVO vo, Model model, HttpSession session) {
+		System.out.println("개인정보 조회");
+		String auth = (String)session.getAttribute("userName");
 		
-		model.addAttribute("board", userService.getUserVO(vo));
-		return "getBoard.jsp";
+		if(auth == null && auth.equals("")) {
+			return "redirect:login.do";
+		} else {
+			model.addAttribute("user", userService.getUserVO(vo));
+			return "joinInfo.jsp";
+		}
 	}
 	
 	@RequestMapping("/updateUser.do")
-	public String updateUser(@ModelAttribute("board") UserVO vo) {	
+	public String updateUser(@ModelAttribute("user") UserVO vo) {	
 		userService.updateUser(vo);
 		return "redirect:getBoardList.do";
 	}
@@ -53,10 +60,8 @@ public class JoinController {
 	public String deletUser(UserVO vo) {
 		System.out.println("글 삭제 처리");
 		
-		userService.deleteBoard(vo);
+		userService.deleteUser(vo);
 		return "redirect:getBoardList.do";
 	}
-	
-	
 	
 }

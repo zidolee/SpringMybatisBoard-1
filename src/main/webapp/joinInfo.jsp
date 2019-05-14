@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,8 +29,8 @@
 				<tr>
 					<td bgcolor="orange">성별</td>
 					<td align="left">
-						<input type="radio" name="sex" value="male">남
-						<input type="radio" name="sex" value="female">여
+						<input type="radio" <c:if test="${user.sex eq 'male'}">checked="checked"</c:if> name="sex" value="male">남
+						<input type="radio" <c:if test="${user.sex eq 'female'}">checked="checked"</c:if> name="sex" value="female">여
 					</td>
 				</tr>
 				<tr>
