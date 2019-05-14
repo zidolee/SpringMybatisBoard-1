@@ -10,16 +10,10 @@ import com.springbook.biz.user.UserVO;
 public class UserServiceImpl implements UserService{
 	
 	@Autowired
-	private UserDAO userDAO;
-	
-	// setter 인젝션
-	public void setUserDAO(UserDAO userDAO) {
-		this.userDAO = userDAO;
-		System.out.println("===> Setter 인젝션 처리");
-	}
+	private UserDAOMybatis userDAO;
 
 	@Override
-	public int insetUserVO(UserVO vo) {
+	public int insertUserVO(UserVO vo) {
 		int joinCheck = 0;
 		joinCheck =  userDAO.insertUser(vo);
 		return joinCheck;
