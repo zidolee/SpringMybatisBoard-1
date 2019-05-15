@@ -41,6 +41,12 @@ public class BoardDAOMybatis2 {
 		return (BoardVO) mybatis.selectOne("BoardDAO.getBoard", vo);
 	}
 	
+	//글 조회수 증가
+	public void updateHitCnt(BoardVO vo) {
+		System.out.println("===> Mybatis2 JDBC로 updateBoard() 기능 처리");
+		mybatis.update("BoardDAO.updateHitCnt", vo);
+	}
+	
 	//글 목록조회
 //	public List<BoardVO> getBoardList(BoardVO vo) {
 //		System.out.println("===> Mybatis2 JDBC로 getBoardList() 기능 처리");

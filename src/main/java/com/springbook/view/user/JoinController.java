@@ -51,7 +51,8 @@ public class JoinController {
 	}
 	
 	@RequestMapping("/updateUser.do")
-	public String updateUser(@ModelAttribute("user") UserVO vo) {	
+	public String updateUser(@ModelAttribute("user") UserVO vo) {
+		System.out.println("개인정보 수정");
 		userService.updateUser(vo);
 		return "redirect:getBoardList.do";
 	}

@@ -32,6 +32,7 @@ public class UserDAOMybatis {
 	// 회원 정보 수정
 	public void updateUser(UserVO vo) {
 		System.out.println("===> Mybatis JDBC로 updateUser() 기능 처리");
+		System.out.println(vo);
 		mybatis.update("UserDAO.updateUser", vo);
 	}
 

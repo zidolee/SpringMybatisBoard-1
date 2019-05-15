@@ -26,10 +26,16 @@
 		]]>	
 	</select>
 	
-	<update id="updateUser">
+	<update id="updateUser" parameterType="user">
 		<![CDATA[
-		UPDATE USERS SET PASSWORD=#{password}, NAME=#{name}, SEX=#{sex}, BIRTHDAY=#{birthday}, HP=#{hp}, ADDRESS=#{address} 
-		WHERE ID=#{id}
+		UPDATE USERS 
+		   SET PASSWORD=#{password}, 
+		       NAME=#{name}, 
+		       SEX=#{sex}, 
+		       BIRTHDAY=#{birthday}, 
+		       HP=#{hp}, 
+		       ADDRESS=#{address} 
+		 WHERE ID=#{id}
 		]]>
 		
 	</update>

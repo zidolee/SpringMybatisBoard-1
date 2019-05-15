@@ -5,14 +5,16 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>회원정보확인</title>
+<title>회원정보확인 및 수정</title>
 </head>
 <body>
 	<div align="center">
 		<h1>회원정보</h1>
 		<a href="getBoardList.do">글 목록</a>
 		<hr>
-		<form action="join.do" method="post">
+		<form action="updateUser.do" method="post">
+			<input name="id" type="hidden" value="${user.id}">
+			<input name="name" type="hidden" value="${user.name}">
 			<table border="1" cellpadding="0" cellspacing="0">
 				<tr>
 					<td bgcolor="orange" width="70">아이디</td>
@@ -36,7 +38,7 @@
 				<tr>
 					<td bgcolor="orange">생년월일</td>
 					<td align="left">
-						<input type="date" name="birthdaty" value="${user.birthday }">
+						<input type="date" name="birthday" value="${user.birthday }">
 					</td>
 				</tr>
 				<tr>

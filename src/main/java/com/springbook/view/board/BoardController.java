@@ -98,8 +98,8 @@ public class BoardController {
 	@RequestMapping("/getBoard.do")
 	public String getBoard(BoardVO vo, Model model) {
 		System.out.println("글 상세 조회 처리");
-		
 		model.addAttribute("board", boardService.getBoard(vo));
+		boardService.updateHitCnt(vo);
 		return "getBoard.jsp";
 	}
 	

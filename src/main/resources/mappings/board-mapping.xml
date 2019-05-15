@@ -25,6 +25,14 @@
 		
 	</update>
 	
+	<update id="updateHitCnt">
+		<![CDATA[
+		UPDATE BOARD 
+		   SET CNT = NVL(cnt, 0) + 1
+		 WHERE SEQ = #{seq}
+		]]>
+	</update>
+	
 	<delete id="deleteBoard">
 		<![CDATA[
 		DELETE BOARD WHERE SEQ=#{seq}
@@ -36,6 +44,7 @@
 		SELECT * FROM BOARD WHERE SEQ=#{seq}
 		]]>	
 	</select>
+	
 	
 	
 	
