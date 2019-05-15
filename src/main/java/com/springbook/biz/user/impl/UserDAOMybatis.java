@@ -15,9 +15,12 @@ public class UserDAOMybatis {
 
 	// crud 기능의 메소드 구현
 	// 회원 가입
-	public void insertUser(UserVO vo) {
+	public int insertUser(UserVO vo) {
 		System.out.println("===> Mybatis JDBC로 insertUser() 기능 처리");
-		mybatis.insert("UserDAO.insertUser", vo);
+		int check = 0;
+		check = mybatis.insert("UserDAO.insertUser", vo);
+		System.out.println(check);
+		return check;
 	}
 	
 	// 회원정보 조회

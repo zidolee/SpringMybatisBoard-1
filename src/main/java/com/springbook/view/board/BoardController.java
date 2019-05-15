@@ -96,7 +96,7 @@ public class BoardController {
 	}
 	
 	@RequestMapping("/getBoard.do")
-	public String handleRequest(BoardVO vo, Model model) {
+	public String getBoard(BoardVO vo, Model model) {
 		System.out.println("글 상세 조회 처리");
 		
 		model.addAttribute("board", boardService.getBoard(vo));

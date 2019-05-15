@@ -2,32 +2,32 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="UserDAO">
 	
-	<insert id="insertBoard">
+	<insert id="insertUser">
 		<![CDATA[
-		INSERT INTO BOARD(SEQ, TITLE, WRITER, CONTENT)
-		VALUES((SELECT NVL(MAX(SEQ), 0) + 1 FROM BOARD), #{title},#{writer}, #{content})
+		INSERT INTO USERS 
+		VALUES(#{id}, #{password}, #{name}, #{sex}, #{birthday}, #{hp}, #{address}, sysdate)
 		]]>
 		
 	</insert>
 	
-	<update id="updateBoard">
+	<select id="getUser" resultType="user" parameterType="user">
+		<![CDATA[
+		SELECT * FROM USERS WHERE ID=#{id}
+		]]>	
+	</select>
+	
+	<update id="updateUser">
 		<![CDATA[
 		UPDATE BOARD SET TITLE=#{title}, CONTENT=#{content} WHERE SEQ=#{seq}
 		]]>
 		
 	</update>
 	
-	<delete id="deleteBoard">
+	<delete id="deleteUser">
 		<![CDATA[
 		DELETE BOARD WHERE SEQ=#{seq}
 		]]>
 	</delete>
-	
-	<select id="getBoard" resultType="board">
-		<![CDATA[
-		SELECT * FROM BOARD WHERE SEQ=#{seq}
-		]]>	
-	</select>
 	
 	
 	
@@ -64,7 +64,7 @@
 	</select> -->
 	
 	<!-- Dynami SQL 적용 -->
-	<select id="getBoardList" resultMap="boardResult">
+	<!-- <select id="getBoardList" resultMap="boardResult">
 		SELECT * 
 		FROM BOARD
 		WHERE 1=1
@@ -78,5 +78,5 @@
 			AND WRITER LIKE '%'||#{searchKeyword}||'%'
 		</if>
 		ORDER BY SEQ DESC
-	</select>
+	</select> -->
 </mapper>

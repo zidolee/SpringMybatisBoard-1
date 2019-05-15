@@ -17,7 +17,7 @@ public class LoginController {
 	public String loginView(@ModelAttribute("user") UserVO vo) {
 		System.out.println("로그인 화면으로 이동");
 		vo.setId("test");
-		vo.setPassword("123");
+		vo.setPassword("1234");
 		return "login.jsp";
 	}
 
@@ -57,6 +57,7 @@ public class LoginController {
 //		else return "redirect:login.jsp";
 		if(user != null) {
 			session.setAttribute("userName", user.getName());
+			session.setAttribute("userId", user.getId());
 			return "redirect:getBoardList.do";
 		} else {
 			return "redirect:login.do";
