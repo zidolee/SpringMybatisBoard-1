@@ -29,8 +29,11 @@
 	
 	<div align="center">
 		<h1><spring:message code="message.board.list.mainTitle"/></h1>
-		<h3>${userName }<spring:message code="message.board.list.welcomMsg"/><a href="logout.do">Log-out</a></h3>
-		<h3><a href="joinInfo.do?id=${userId }">회원정보</a></h3>
+		<h3>${userName }<spring:message code="message.board.list.welcomMsg"/></h3>
+		<h3>
+		<a href="logout.do">Log-out</a>&nbsp;&nbsp;&nbsp;
+		<a href="getUser.do?id=${userId }">회원정보</a>
+		</h3>
 		<form action="getBoardList.do" method="post">
 			<table border="1" cellpadding="0" cellspacing="0" width="700">
 				<tr>

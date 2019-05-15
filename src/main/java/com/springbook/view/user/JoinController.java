@@ -37,7 +37,7 @@ public class JoinController {
 		return "join.jsp";
 	}
 	
-	@RequestMapping("/joinInfo.do")
+	@RequestMapping("/getUser.do")
 	public String getUser(UserVO vo, Model model, HttpSession session) {
 		System.out.println("개인정보 조회");
 		String auth = (String)session.getAttribute("userName");

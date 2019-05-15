@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="UserDAO">
+	<resultMap type="user" id="boardResult">
+		<id property="id" column="ID"/>
+		<result property="password" column="PASSWORD"/>
+		<result property="name" column="NAME"/>
+		<result property="sex" column="SEX"/>
+		<result property="birthday" column="BIRTHDAY"/>
+		<result property="hp" column="HP"/>
+		<result property="address" column="ADDRESS"/>
+		<result property="reg_date" column="REG_DATE"/>
+	</resultMap>
 	
 	<insert id="insertUser">
 		<![CDATA[
@@ -10,7 +20,7 @@
 		
 	</insert>
 	
-	<select id="getUser" resultType="user" parameterType="user">
+	<select id="getUser" resultType="user">
 		<![CDATA[
 		SELECT * FROM USERS WHERE ID=#{id}
 		]]>	
@@ -18,14 +28,15 @@
 	
 	<update id="updateUser">
 		<![CDATA[
-		UPDATE BOARD SET TITLE=#{title}, CONTENT=#{content} WHERE SEQ=#{seq}
+		UPDATE USERS SET PASSWORD=#{password}, NAME=#{name}, SEX=#{sex}, BIRTHDAY=#{birthday}, HP=#{hp}, ADDRESS=#{address} 
+		WHERE ID=#{id}
 		]]>
 		
 	</update>
 	
 	<delete id="deleteUser">
 		<![CDATA[
-		DELETE BOARD WHERE SEQ=#{seq}
+		DELETE USERS WHERE ID=#{id}
 		]]>
 	</delete>
 	
