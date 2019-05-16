@@ -54,15 +54,14 @@ public class JoinController {
 	public String updateUser(@ModelAttribute("user") UserVO vo) {
 		System.out.println("개인정보 수정");
 		userService.updateUser(vo);
-		return "redirect:getBoardList.do";
+		return "getUser.do";
 	}
 	
 	@RequestMapping("/deleteUser.do")
 	public String deletUser(UserVO vo) {
-		System.out.println("글 삭제 처리");
-		
+		System.out.println("회원 탈퇴 처리");
 		userService.deleteUser(vo);
-		return "redirect:getBoardList.do";
+		return "redirect:login.do";
 	}
 	
 }

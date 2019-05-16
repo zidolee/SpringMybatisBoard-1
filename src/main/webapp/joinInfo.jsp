@@ -62,7 +62,7 @@
 				<tr>
 					<td colspan="2" align="center">
 						<input type="submit" value="정보수정">&nbsp;
-						<input type="button" onclick="location:href=''" value="회원탈퇴">&nbsp;
+						<input type="button" onclick="location.href='deleteUser.do?id=${user.id}'" value="회원탈퇴">&nbsp;
 					</td>
 				</tr>
 			</table>
