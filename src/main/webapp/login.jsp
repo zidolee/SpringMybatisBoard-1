@@ -26,7 +26,7 @@
 				<tr>
 					<td colspan="2" align="center">
 						<input type="submit" value="<spring:message code="message.user.login.loginBtn"/>">
-						<input type="button" onclick="location.href='join.do'" value="<spring:message code="message.user.login.joinBtn"/>" />
+						<input type="button" onclick="location.href='joinPage.do'" value="<spring:message code="message.user.login.joinBtn"/>" />
 					</td>
 				</tr>
 			</table>

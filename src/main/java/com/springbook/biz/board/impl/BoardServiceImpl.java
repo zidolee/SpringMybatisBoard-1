@@ -49,9 +49,5 @@ public class BoardServiceImpl implements BoardService {
 		return boardDAO.getBoardList(vo);
 	}
 
-	@Override
-	public void updateHitCnt(BoardVO vo) {
-		boardDAO.updateHitCnt(vo);
-	}
 	
 }

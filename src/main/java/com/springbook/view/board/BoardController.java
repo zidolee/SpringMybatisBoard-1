@@ -87,6 +87,12 @@ public class BoardController {
 		return "redirect:getBoardList.do";
 	}
 	
+	@RequestMapping("/insertBoardForm.do")
+	public String insertBoardForm() {
+
+		return "insertBoard.jsp";
+	}
+	
 	@RequestMapping("/deleteBoard.do")
 	public String deletBoard(BoardVO vo) {
 		System.out.println("글 삭제 처리");
@@ -99,7 +105,6 @@ public class BoardController {
 	public String getBoard(BoardVO vo, Model model) {
 		System.out.println("글 상세 조회 처리");
 		model.addAttribute("board", boardService.getBoard(vo));
-		boardService.updateHitCnt(vo);
 		return "getBoard.jsp";
 	}
 	
