@@ -9,6 +9,7 @@ message.user.login.language.en=영어
 message.user.login.language.ko=한글
 
 # getBoardList.jsp
+message.board.list.logout=로그아웃
 message.board.list.mainTitle=게시글 목록
 message.board.list.welcomMsg=님! 게시판에 오신걸 환영합니다.
 message.board.list.userInfo=회원 정보
@@ -23,7 +24,7 @@ message.board.list.table.head.cnt=조회수
 message.board.list.link.insertBoard=새글 등록
 
 # getBoard.jsp
-message.board.detail.mainTitle=글 상세
+message.board.detail.mainTitle=글 상세 내용
 message.board.detail.title=제목
 message.board.detail.writer=작성자
 message.board.detail.content=내용
@@ -33,3 +34,43 @@ message.board.detail.updateBtn=글 수정
 message.board.detail.link.insertBoard=글 등록
 message.board.detail.link.deleteBoard=글 삭제
 message.board.detail.link.boardList=글 목록
+
+# insertBoard.jsp
+message.board.insert.mainTitle=글 등록
+message.board.insert.logout=로그아웃 
+message.board.insert.title=제목
+message.board.insert.writer=작성자
+message.board.insert.content=내용
+message.board.insert.upload=업로드
+message.board.insert.insertBtn=등록
+message.board.insert.boardList=글 목록
+
+# join.jsp
+message.board.join.mainTitle=회원가입
+message.board.join.loginBtn=로그인
+message.board.join.id=아이디
+message.board.join.password=비밀번호
+message.board.join.name=이름
+message.board.join.sex=성별
+message.board.join.male=남
+message.board.join.female=여
+message.board.join.birthday=생년월일
+message.board.join.hp=휴대폰
+message.board.join.address=주소
+message.board.join.signupBtn=가입
+
+# joinInfo.jsp
+message.board.joinInfo.mainTitle=회원 정보
+message.board.joinInfo.boardList=글 목록
+message.board.joinInfo.id=아이디
+message.board.joinInfo.password=비밀번호
+message.board.joinInfo.name=이름
+message.board.joinInfo.sex=성별
+message.board.joinInfo.male=남
+message.board.joinInfo.female=여
+message.board.joinInfo.birthday=생년월일
+message.board.joinInfo.hp=휴대폰
+message.board.joinInfo.address=주소
+message.board.joinInfo.signupDate=가입날짜
+message.board.joinInfo.updateBtn=정보수정
+message.board.joinInfo.deleteBtn=탈퇴
