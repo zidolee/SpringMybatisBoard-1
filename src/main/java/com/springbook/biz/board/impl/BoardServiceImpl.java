@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.springbook.biz.board.BoardService;
 import com.springbook.biz.board.BoardVO;
+import com.springbook.biz.board.Criteria;
 //조인포인트
 @Service("boardService")
 public class BoardServiceImpl implements BoardService {
@@ -49,5 +50,15 @@ public class BoardServiceImpl implements BoardService {
 		return boardDAO.getBoardList(vo);
 	}
 
+	@Override
+	public List<BoardVO> listCriteria(Criteria criteria) throws Exception {
+		System.out.println(criteria.getPageStart());
+		System.out.println(criteria.getPerPageNum());
+	    return boardDAO.listCriteria(criteria);
+	}
 	
+	@Override
+	public int countArticles(Criteria criteria) throws Exception {
+	    return boardDAO.countArticles(criteria);
+	}
 }

@@ -19,4 +19,7 @@ public interface BoardService {
 	//글 목록 조회 
 	List<BoardVO> getBoardList(BoardVO vo);
 
+	List<BoardVO> listCriteria(Criteria criteria) throws Exception;
+	
+	int countArticles(Criteria criteria) throws Exception;
 }

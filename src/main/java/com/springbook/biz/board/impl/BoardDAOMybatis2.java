@@ -2,13 +2,12 @@ package com.springbook.biz.board.impl;
 
 import java.util.List;
 
-import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionTemplate;
-import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.springbook.biz.board.BoardVO;
+import com.springbook.biz.board.Criteria;
 
 @Repository
 public class BoardDAOMybatis2 {
@@ -60,5 +59,26 @@ public class BoardDAOMybatis2 {
 		System.out.println("===> Mybatis2 JDBC로 getBoardList() 기능 처리");
 		return mybatis.selectList("BoardDAO.getBoardList", vo);
 	}
+	
+	public List<BoardVO> listPaging(int page) throws Exception {
+		if(page <= 0) {
+			page = 1;
+		}
+		
+		page = (page - 1) * 10;
+		
+		return mybatis.selectList("BoardDAO.listPaging", page);
+	}
+	
+	public List<BoardVO> listCriteria(Criteria criteria) throws Exception {
+		System.out.println("===> Mybatis2 JDBC 페이징 기능 처리");
+	    return mybatis.selectList("BoardDAO.listCriteria", criteria);
+	}
+	
+
+	public int countArticles(Criteria criteria) throws Exception {
+	    return mybatis.selectOne("BoardDAO.countArticles", criteria);
+	}
+
 }
 

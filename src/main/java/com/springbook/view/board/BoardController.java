@@ -13,12 +13,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.springbook.biz.board.BoardService;
 import com.springbook.biz.board.BoardVO;
+import com.springbook.biz.board.Criteria;
+import com.springbook.biz.board.PageMaker;
 
 @Controller
 @SessionAttributes("board")
@@ -68,7 +71,14 @@ public class BoardController {
 			String fileName = uploadFile.getOriginalFilename();
 			uploadFile.transferTo(new File("C:/temp/" + fileName));
 		}
-		
+//		 for (int i = 1; i <= 1000; i++) {
+//		     
+//		        vo.setTitle(i+ "번째 글 제목입니다...");
+//		        vo.setContent(i+ "번재 글 내용입니다...");
+//		        vo.setWriter("user0"+(i%10));
+//
+//		        boardService.insertBoard(vo);
+//		    }
 		boardService.insertBoard(vo);
 		return "redirect:getBoardList.do";
 		
@@ -108,9 +118,28 @@ public class BoardController {
 		return "getBoard.jsp";
 	}
 	
+//	원본
+//	@RequestMapping("/getBoardList.do")
+//	public String getBoardList(BoardVO vo, Model model, HttpSession session) {
+//		System.out.println("글 목록 검색 처리");
+//		System.out.println(session.getAttribute("userName"));
+//		String auth  = (String)session.getAttribute("userName");
+//		
+//		// Null Check
+//		if(vo.getSearchCondition() == null) vo.setSearchCondition("TITLE");
+//		if(vo.getSearchKeyword() == null) vo.setSearchKeyword("");
+//		if(auth == null && auth.equals("")) {
+//			return "redirect:login.do";
+//		} else {
+//			model.addAttribute("boardList", boardService.getBoardList(vo));
+//			return "getBoardList.jsp";
+//		}
+//		
+//	}
 	
-	@RequestMapping("/getBoardList.do")
-	public String getBoardList(BoardVO vo, Model model, HttpSession session) {
+	
+	@RequestMapping(value="/getBoardList.do", method = RequestMethod.GET)
+	public String getBoardList(BoardVO vo, Model model, HttpSession session, Criteria criteria) throws Exception {
 		System.out.println("글 목록 검색 처리");
 		System.out.println(session.getAttribute("userName"));
 		String auth  = (String)session.getAttribute("userName");
@@ -121,7 +150,12 @@ public class BoardController {
 		if(auth == null && auth.equals("")) {
 			return "redirect:login.do";
 		} else {
-			model.addAttribute("boardList", boardService.getBoardList(vo));
+			PageMaker pageMaker = new PageMaker();
+		    pageMaker.setCriteria(criteria);
+		    pageMaker.setTotalCount(boardService.countArticles(criteria));
+		    
+			model.addAttribute("boardList", boardService.listCriteria(criteria));
+			model.addAttribute("pageMaker", pageMaker);
 			return "getBoardList.jsp";
 		}
 		

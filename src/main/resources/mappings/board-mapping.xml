@@ -96,4 +96,43 @@
 		</if>
 		ORDER BY SEQ DESC
 	</select>
+	
+	<select id="listPaging" resultMap="boardResult">
+		<![CDATA[
+			select * 
+  			  from (select rownum as rnum, 
+                           bo.* 
+                       from (select * from board order by seq desc) bo)
+ 			 where rnum between #{page} and 10
+		]]>
+	</select>
+	
+	<select id="listCriteria" resultMap="boardResult">
+	   <!--  <![CDATA[ -->
+	    select * 
+  			  from (select rownum as rnum, 
+                           bo.* 
+                       from (select * from board order by seq desc) bo)
+ 			 where rnum between #{pageStart} and #{perPageNum}
+ 			 <if test="searchCondition == 'TITLE'">
+			AND TITLE LIKE '%'||#{searchKeyword}||'%'
+		</if>
+		<if test="searchCondition == 'CONTENT'">
+			AND CONTENT LIKE '%'||#{searchKeyword}||'%'
+		</if>
+		<if test="searchCondition == 'WRITER'">
+			AND WRITER LIKE '%'||#{searchKeyword}||'%'
+		</if>
+   		<!-- ]]> -->
+   	</select>
+	
+	<select id="countArticles" resultType="int">
+	    <![CDATA[
+	    SELECT
+	        COUNT(seq)
+	    FROM board
+	    WHERE seq > 0
+	    ]]>
+	</select>
+
 </mapper>
