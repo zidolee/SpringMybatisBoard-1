@@ -62,7 +62,10 @@
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
-    <p class="login-box-msg">Sign in to start your session</p>
+    <p class="login-box-msg">
+	    <a href="login.do?lang=en"><spring:message code="message.user.login.language.en"/></a>&nbsp;&nbsp;
+		<a href="login.do?lang=ko"><spring:message code="message.user.login.language.ko"/></a>
+	</p>
 
     <form method="post" action="login.do">
       <div class="form-group has-feedback">

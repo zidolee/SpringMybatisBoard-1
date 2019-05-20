@@ -156,7 +156,7 @@
                 </p>
               </li>
               <!-- Menu Body -->
-              <li class="user-body">
+             <!--  <li class="user-body">
                 <div class="row">
                   <div class="col-xs-4 text-center">
                     <a href="#">Followers</a>
@@ -168,8 +168,8 @@
                     <a href="#">Friends</a>
                   </div>
                 </div>
-                <!-- /.row -->
-              </li>
+                /.row
+              </li> -->
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">
@@ -189,14 +189,15 @@
       </div>
     </nav>
   </header>
-	<div class="box">
-            <div class="box-header with-border">
+	<section class="content container-fluid">
+		<div class="box">
+            <!-- <div class="box-header with-border">
               <h3 class="box-title">Bordered Table</h3>
-            </div>
+            </div> -->
             <!-- /.box-header -->
             <div class="box-body">
 	            <form action="getBoardList.do" method="get">
-					<table class="table table-bordered">
+					<table class="table">
 						<tr>
 							<td align="right">
 								<select name="searchCondition">
@@ -212,7 +213,7 @@
 				</form>
               <table class="table table-bordered">
                 <tr>
-                  <th style="width: 10%"><spring:message code="message.board.list.table.head.seq"/></th>
+                  <th style="width: 5%"><spring:message code="message.board.list.table.head.seq"/></th>
 				  <th ><spring:message code="message.board.list.table.head.title"/></th>
 			      <th ><spring:message code="message.board.list.table.head.writer"/></th>
 				  <th ><spring:message code="message.board.list.table.head.regDate"/></th>
@@ -250,6 +251,7 @@
 			</div>
           </div>
           <!-- /.box -->
+	</section>
 </div>
           
 
@@ -260,7 +262,7 @@
 <!-- FastClick -->
 <script src="./bower_components/fastclick/lib/fastclick.js"></script>
 <!-- AdminLTE App -->
-<script src="dist/js/adminlte.min.js"></script>
+<script src="./dist/js/adminlte.min.js"></script>
 <!-- Sparkline -->
 <script src="./bower_components/jquery-sparkline/dist/jquery.sparkline.min.js"></script>
 <!-- jvectormap  -->
