@@ -83,8 +83,12 @@ public class BoardController {
 		return "redirect:getBoardList.do";
 		
 	}
-	
-	@RequestMapping("/updateBoard.do")
+	@RequestMapping(value="/modifyForm.do", method=RequestMethod.GET)
+	public String modifyForm(BoardVO vo, Model model) {
+		model.addAttribute("board", boardService.getBoard(vo));
+		return "/article/modify";
+	}
+	@RequestMapping("/modify.do")
 	public String updateBoard(@ModelAttribute("board") BoardVO vo) {
 		System.out.println("번호 : " + vo.getSeq());
 		System.out.println("제목 : " + vo.getTitle());
@@ -100,7 +104,7 @@ public class BoardController {
 	@RequestMapping("/insertBoardForm.do")
 	public String insertBoardForm() {
 
-		return "insertBoard.jsp";
+		return "/article/insertBoard";
 	}
 	
 	@RequestMapping("/deleteBoard.do")
@@ -115,7 +119,7 @@ public class BoardController {
 	public String getBoard(BoardVO vo, Model model) {
 		System.out.println("글 상세 조회 처리");
 		model.addAttribute("board", boardService.getBoard(vo));
-		return "getBoard.jsp";
+		return "article/getBoard";
 	}
 	
 //	원본
@@ -156,7 +160,7 @@ public class BoardController {
 		    
 			model.addAttribute("boardList", boardService.listCriteria(criteria));
 			model.addAttribute("pageMaker", pageMaker);
-			return "getBoardList.jsp";
+			return "/article/getBoardList";
 		}
 		
 	}

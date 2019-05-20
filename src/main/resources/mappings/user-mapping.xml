@@ -14,7 +14,7 @@
 	
 	<insert id="insertUser">
 		<![CDATA[
-		INSERT INTO USERS 
+		INSERT INTO USERS(id, password, name, sex, birthday, hp, address, reg_date)
 		VALUES(#{id}, #{password}, #{name}, #{sex}, #{birthday}, #{hp}, #{address}, sysdate)
 		]]>
 		

@@ -22,19 +22,19 @@ public class UserController {
 	
 	@RequestMapping(value="/join.do", method=RequestMethod.POST)
 	public String jogin(UserVO vo) {
-		System.out.println("회원가입"); 
+		System.out.println(vo); 
 		int join = 0;
 		join = userService.insertUserVO(vo);
 		if(join == 1) {
-			return "redirect:login.do";
+			return "redirect:home.do";
 		} else {
-			return "join.jsp";
+			return "/user/join";
 		}
 	}
 	
 	@RequestMapping(value="/joinPage.do")
 	public String joinPage() {
-		return "join.jsp";
+		return "/user/join";
 	}
 	
 	@RequestMapping("/getUser.do")
@@ -46,15 +46,16 @@ public class UserController {
 			return "redirect:login.do";
 		} else {
 			model.addAttribute("user", userService.getUserVO(vo));
-			return "joinInfo.jsp";
+			return "/user/joinInfo";
 		}
 	}
 	
-	@RequestMapping("/updateUser.do")
-	public String updateUser(@ModelAttribute("user") UserVO vo) {
+	@RequestMapping(value="/updateUser.do", method=RequestMethod.POST)
+	public String updateUser(@ModelAttribute("user") UserVO vo, Model model) {
 		System.out.println("개인정보 수정");
 		userService.updateUser(vo);
-		return "getUser.do";
+		model.addAttribute("user", userService.getUserVO(vo));
+		return "/user/joinInfo";
 	}
 	
 	// 2.loginController
@@ -71,7 +72,7 @@ public class UserController {
 		System.out.println("로그인 화면으로 이동");
 		vo.setId("test");
 		vo.setPassword("1234");
-		return "login.jsp";
+		return "/user/login";
 	}
 
 	@RequestMapping(value="/login.do", method=RequestMethod.POST)
@@ -90,7 +91,7 @@ public class UserController {
 		if(user != null) {
 			session.setAttribute("userName", user.getName());
 			session.setAttribute("userId", user.getId());
-			return "redirect:getBoardList.do";
+			return "redirect:home.do";
 		} else {
 			return "redirect:login.do";
 		}
@@ -102,6 +103,6 @@ public class UserController {
 		System.out.println("로그아웃 처리");
 
 		session.invalidate();
-		return "redirect:login.do";
+		return "redirect:home.do";
 	}
 }

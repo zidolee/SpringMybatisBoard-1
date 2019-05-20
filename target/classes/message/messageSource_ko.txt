@@ -10,8 +10,11 @@ message.user.login.language.ko=한글
 
 # getBoardList.jsp
 message.board.list.logout=로그아웃
+message.board.list.login=로그인
+message.board.list.join=회원가입
 message.board.list.mainTitle=게시글 목록
 message.board.list.welcomMsg=님! 게시판에 오신걸 환영합니다.
+message.board.list.loginPls=로그인 부탁드립니다.
 message.board.list.userInfo=회원 정보
 message.board.list.search.condition.title=제목
 message.board.list.search.condition.content=내용
