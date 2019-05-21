@@ -14,9 +14,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.springbook.biz.board.BoardService;
 import com.springbook.biz.board.BoardVO;
@@ -62,7 +64,7 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value="/insertBoard.do")	//value=생략 가능
-	public String insertBoard(BoardVO vo) throws IOException {
+	public String insertBoard(BoardVO vo, RedirectAttributes redirectAttributes) throws IOException {
 		System.out.println("글 등록 처리");
 		
 		//파일 업로드
@@ -80,16 +82,18 @@ public class BoardController {
 //		        boardService.insertBoard(vo);
 //		    }
 		boardService.insertBoard(vo);
+		redirectAttributes.addFlashAttribute("msg", "regSuccess");
 		return "redirect:getBoardList.do";
 		
 	}
 	@RequestMapping(value="/modifyForm.do", method=RequestMethod.GET)
-	public String modifyForm(BoardVO vo, Model model) {
-		model.addAttribute("board", boardService.getBoard(vo));
+	public String modifyForm(@RequestParam("seq") int seq,
+            @ModelAttribute("criteria") Criteria criteria,BoardVO vo, Model model) {
+		model.addAttribute("board", boardService.getBoard(seq));
 		return "/article/modify";
 	}
-	@RequestMapping("/modify.do")
-	public String updateBoard(@ModelAttribute("board") BoardVO vo) {
+	@RequestMapping(value="/modify.do", method=RequestMethod.POST)
+	public String updateBoard(@ModelAttribute("board") BoardVO vo, Criteria criteria, RedirectAttributes redirectAttributes) {
 		System.out.println("번호 : " + vo.getSeq());
 		System.out.println("제목 : " + vo.getTitle());
 		System.out.println("작성자 : " + vo.getWriter());
@@ -98,6 +102,9 @@ public class BoardController {
 		System.out.println("조회수 : " + vo.getCnt());
 		
 		boardService.updateBoard(vo);
+		redirectAttributes.addAttribute("page", criteria.getPage());
+	    redirectAttributes.addAttribute("perPageNum", criteria.getPerPageNum());
+		redirectAttributes.addFlashAttribute("msg", "modSuccess");
 		return "redirect:getBoardList.do";
 	}
 	
@@ -108,17 +115,24 @@ public class BoardController {
 	}
 	
 	@RequestMapping("/deleteBoard.do")
-	public String deletBoard(BoardVO vo) {
+	public String deletBoard(@RequestParam("articleNo") int articleNo,
+            				 Criteria criteria,
+            				 BoardVO vo,
+            				 RedirectAttributes redirectAttributes) {
 		System.out.println("글 삭제 처리");
 		
+		redirectAttributes.addAttribute("page", criteria.getPage());
+	    redirectAttributes.addAttribute("perPageNum", criteria.getPerPageNum());
+	    redirectAttributes.addFlashAttribute("msg", "delSuccess");
 		boardService.deleteBoard(vo);
 		return "redirect:getBoardList.do";
 	}
 	
-	@RequestMapping("/getBoard.do")
-	public String getBoard(BoardVO vo, Model model) {
+	@RequestMapping(value="/getBoard.do", method = RequestMethod.GET)
+	public String getBoard(@RequestParam("seq") int seq,
+            @ModelAttribute("criteria") Criteria criteria,BoardVO vo, Model model) {
 		System.out.println("글 상세 조회 처리");
-		model.addAttribute("board", boardService.getBoard(vo));
+		model.addAttribute("board", boardService.getBoard(seq));
 		return "article/getBoard";
 	}
 	
@@ -160,6 +174,7 @@ public class BoardController {
 		    
 			model.addAttribute("boardList", boardService.listCriteria(criteria));
 			model.addAttribute("pageMaker", pageMaker);
+			System.out.println(pageMaker.makeQuery(criteria.getPage()));
 			return "/article/getBoardList";
 		}
 		

@@ -28,7 +28,7 @@
             </h1>
             <ol class="breadcrumb">
                 <li><i class="fa fa-edit"></i> article</li>
-                <li class="active"><a href="${path}/getBoardList.do"> list</a></li>
+                <li class="active"><a href="${path}/getBoardList.do">getBoard</a></li>
             </ol>
         </section>
 
@@ -41,7 +41,9 @@
                         <h3 class="box-title"><spring:message code="message.board.detail.title" />: ${board.title}</h3>
                     </div>
                     <div class="box-body" style="height: 700px">
-                        ${board.content}
+                       <label>
+                       	${board.content}
+                       </label>
                     </div>
                     <div class="box-footer">
                         <div class="user-block">
@@ -56,10 +58,10 @@
                         <form role="form" method="post">
                             <input type="hidden" name="seq" value="${board.seq }">
                         </form>
-                        <button type="button" class="btn btn-primary listBtn" onclick="location.href='getBoardList.do'"><i class="fa fa-list"></i> <spring:message code="message.board.detail.link.boardList" /></button>
+                        <button type="button" class="btn btn-primary listBtn" onclick="location.href='getBoardList.do?page=${criteria.page}&perPageNum=${criteria.perPageNum}'"><i class="fa fa-list"></i> <spring:message code="message.board.detail.link.boardList" /></button>
                         <div class="pull-right">
-                            <button type="button" onclick="location.href='modifyForm.do'" class="btn btn-warning modBtn"><i class="fa fa-edit"></i> <spring:message code="message.board.detail.updateBtn"/></button>
-                            <button type="button" onclick="location.href='deleteBoard.do?seq=${board.seq }'" class="btn btn-danger delBtn"><i class="fa fa-trash"></i> <spring:message code="message.board.detail.link.deleteBoard" /></button>
+                            <button type="button" onclick="location.href='modifyForm.do?page=${criteria.page}&perPageNum=${criteria.perPageNum}&seq=${board.seq }'" class="btn btn-warning modBtn"><i class="fa fa-edit"></i> <spring:message code="message.board.detail.updateBtn"/></button>
+                            <button type="button" onclick="location.href='deleteBoard.do?page=${criteria.page}&perPageNum=${criteria.perPageNum}&seq=${board.seq }'" class="btn btn-danger delBtn"><i class="fa fa-trash"></i> <spring:message code="message.board.detail.link.deleteBoard" /></button>
                         </div>
                     </div>
                 </div>

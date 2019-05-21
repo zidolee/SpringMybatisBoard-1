@@ -54,19 +54,20 @@
 						</form>
                         <table class="table table-bordered">
 			                <tr>
-			                  <th style="width: 5%"><spring:message code="message.board.list.table.head.seq"/></th>
-							  <th ><spring:message code="message.board.list.table.head.title"/></th>
-						      <th ><spring:message code="message.board.list.table.head.writer"/></th>
-							  <th ><spring:message code="message.board.list.table.head.regDate"/></th>
-							  <th style="width: 5%"><spring:message code="message.board.list.table.head.cnt"/></th>
+			                  <td align="center" width="8%" style="font-weight: bolder;"><spring:message code="message.board.list.table.head.seq"/></td>
+							  <td align="center" style="font-weight: bolder;"><spring:message code="message.board.list.table.head.title"/></td>
+						      <td align="center" style="font-weight: bolder;"><spring:message code="message.board.list.table.head.writer"/></td>
+							  <td align="center" style="font-weight: bolder;"><spring:message code="message.board.list.table.head.regDate"/></td>
+							  <td align="center" width="8%" style="font-weight: bolder;"><spring:message code="message.board.list.table.head.cnt"/></td>
 			                </tr>
 							<c:forEach items="${boardList }" var="board">
 								<tr>
 									<td align="center">${board.seq }</td>
-									<td align="left">&nbsp;<a href="getBoard.do?seq=${board.seq }">${board.title }</a></td>
+									<%-- <td align="left">&nbsp;<a href="getBoard.do?seq=${board.seq }">${board.title }</a></td> --%>
+									<td align="left">&nbsp;<a href="getBoard.do${pageMaker.makeQuery(pageMaker.criteria.page)}&seq=${board.seq }">${board.title }</a></td>
 									<td align="center">${board.writer }</td>
 									<td align="center"><fmt:formatDate value="${board.regDate }" pattern="yyyy-MM-dd"/></td>
-									<td align="center">${board.cnt }</td>
+									<td align="center"><span class="badge bg-red">${board.cnt}</span></td>
 								</tr>
 							</c:forEach>
               			</table>
@@ -78,15 +79,18 @@
                          <div class="text-center">
 					        <ul class="pagination">
 					            <c:if test="${pageMaker.prev}">
-					                <li><a href="getBoardList.do?page=${pageMaker.startPage - 1}">이전</a></li>
+					                <%-- <li><a href="getBoardList.do?page=${pageMaker.startPage - 1}">이전</a></li> --%>
+					                <li><a href="getBoardList.do${pageMaker.makeQuery(pageMaker.startPage - 1)}">이전</a></li>
 					            </c:if>
 					            <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
 					                <li <c:out value="${pageMaker.criteria.page == idx ? 'class=active' : ''}"/>>
-					                    <a href="getBoardList.do?page=${idx}">${idx}</a>
+					                    <%-- <a href="getBoardList.do?page=${idx}">${idx}</a> --%>
+					                    <a href="getBoardList.do${pageMaker.makeQuery(idx)}">${idx}</a>
 					                </li>
 					            </c:forEach>
 					            <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-					                <li><a href="getBoardList.do?page=${pageMaker.endPage + 1}">다음</a></li>
+					                <%-- <li><a href="getBoardList.do?page=${pageMaker.endPage + 1}">다음</a></li> --%>
+					                <li><a href="getBoardList.do${pageMaker.makeQuery(pageMaker.endPage + 1)}">다음</a></li>
 					            </c:if>
 					        </ul>
 					    </div>

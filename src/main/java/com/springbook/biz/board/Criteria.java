@@ -4,7 +4,6 @@ public class Criteria {
 	private int page;
     private int perPageNum;
 	private String searchCondition;
-//	@XmlTransient
 	private String searchKeyword;
 
     public String getSearchCondition() {
@@ -43,21 +42,15 @@ public class Criteria {
     }
 
     public void setPerPageNum(int perPageNum) {
-
-        if (perPageNum <= 0 || perPageNum > 100) {
-            this.perPageNum = 10;
-            return;
-        }
-
-        this.perPageNum = perPageNum;
+        this.perPageNum = page*10;
     }
 
     public int getPerPageNum() {
-        return page*10;
+        return this.perPageNum;
     }
 
     public int getPageStart() {
-        return (this.page - 1) * perPageNum+1;
+        return (this.page - 1) * 10+1;
     }
     
     
