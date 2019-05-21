@@ -125,6 +125,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <form role="form" id="userInfoModForm" action="updateUser.do" method="post">
+                    <%-- <input type="hidden" name="id" value="${userId}"> --%>
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">×</span></button>

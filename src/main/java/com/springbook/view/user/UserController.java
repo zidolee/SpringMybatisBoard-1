@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.springbook.biz.user.UserService;
 import com.springbook.biz.user.UserVO;
@@ -51,11 +52,12 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/updateUser.do", method=RequestMethod.POST)
-	public String updateUser(@ModelAttribute("user") UserVO vo, Model model) {
+	public String updateUser(@ModelAttribute("user") UserVO vo, Model model, RedirectAttributes redirectAttributes, HttpSession session) {
 		System.out.println("개인정보 수정");
 		userService.updateUser(vo);
-		model.addAttribute("user", userService.getUserVO(vo));
-		return "/user/joinInfo";
+//		model.addAttribute("user", userService.getUserVO(vo));
+		redirectAttributes.addAttribute("id", session.getAttribute("userId") );
+		return "redirect:getUser.do";
 	}
 	
 	// 2.loginController
