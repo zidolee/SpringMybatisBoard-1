@@ -11,7 +11,7 @@ public interface BoardService {
 	void updateBoard(BoardVO vo);
 
 	//글 삭제
-	void deleteBoard(BoardVO vo);
+	void deleteBoard(int seq);
 
 	//글 상세 조회
 	BoardVO getBoard(int seq);

@@ -29,9 +29,9 @@ public class BoardDAOMybatis2 {
 	}
 	
 	// 글 삭제
-	public void deleteBoard(BoardVO vo) {
+	public void deleteBoard(int seq) {
 		System.out.println("===> Mybatis2 JDBC로 deleteBoard() 기능 처리");
-		mybatis.delete("BoardDAO.deleteBoard", vo);
+		mybatis.delete("BoardDAO.deleteBoard", seq);
 	}
 	
 	// 글 상세 조회

@@ -115,7 +115,7 @@ public class BoardController {
 	}
 	
 	@RequestMapping("/deleteBoard.do")
-	public String deletBoard(@RequestParam("articleNo") int articleNo,
+	public String deletBoard(@RequestParam("seq") int seq,
             				 Criteria criteria,
             				 BoardVO vo,
             				 RedirectAttributes redirectAttributes) {
@@ -124,7 +124,7 @@ public class BoardController {
 		redirectAttributes.addAttribute("page", criteria.getPage());
 	    redirectAttributes.addAttribute("perPageNum", criteria.getPerPageNum());
 	    redirectAttributes.addFlashAttribute("msg", "delSuccess");
-		boardService.deleteBoard(vo);
+		boardService.deleteBoard(seq);
 		return "redirect:getBoardList.do";
 	}
 	
