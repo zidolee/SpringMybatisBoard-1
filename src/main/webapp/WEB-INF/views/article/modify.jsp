@@ -37,6 +37,9 @@
 
             <div class="col-lg-12">
                 <form role="form" id="writeForm" method="post" action="modify.do" enctype="multipart/form-data">
+               		<input type="hidden" name="seq" value="${board.seq }">
+			        <input type="hidden" name="page" value="${criteria.page}">
+			        <input type="hidden" name="perPageNum" value="${criteria.perPageNum}">
                     <div class="box box-primary">
                         <div class="box-header with-border">
                             <h3 class="box-title"><spring:message code="message.board.insert.title"/></h3>
@@ -50,24 +53,33 @@
                                 <label for="writer"><spring:message code="message.board.insert.writer"/></label>
                                 <input class="form-control" id="writer" name="writer" value="${board.writer }" disabled="disabled">
                             </div>
-                            <div class="form-group">
+                            <%-- <div class="form-group">
                                 <label for="content"><spring:message code="message.board.insert.content"/></label>
                                 <textarea class="form-control" id="content" name="content" rows="30"
                                           placeholder="내용을 입력해주세요" style="resize: none;">${board.content}</textarea>
-                            </div>
+                            </div> --%>
+                    
+				              <!-- /. tools -->
+				            </div>
+				            <!-- /.box-header -->
+				            <div class="box-body pad">
+				              		<label for="content"><spring:message code="message.board.insert.content"/></label>
+				                    <textarea id="editor1" name="content" rows="10" cols="80" placeholder="내용을 입력해주세요">
+				                    ${board.content}
+				                    </textarea>
+				            </div>
                             <div class="form-group">
                                 <label for="upload"><spring:message code="message.board.insert.upload"/></label>
                                 <input class="form-control" type="file" name="uploadFile">
                             </div>
                         </div>
                         <div class="box-footer">
-                            <button type="button" onclick="location.href='getBoardList.do'" class="btn btn-primary"><i class="fa fa-list"></i> <spring:message code="message.board.insert.boardList"/></button>
+                            <button type="button" onclick="location.href='getBoardList.do?page=${criteria.page}&perPageNum=${criteria.perPageNum}'" class="btn btn-primary"><i class="fa fa-list"></i> <spring:message code="message.board.insert.boardList"/></button>
                             <div class="pull-right">
                                 <button type="reset" class="btn btn-warning"><i class="fa fa-reply"></i> 초기화</button>
                                 <input type="submit" class="btn btn-success" value="<spring:message code="message.board.insert.insertBtn"/>">
                             </div>
-                        </div>
-                    </div>
+                        </div> 
                 </form>
             </div>
 

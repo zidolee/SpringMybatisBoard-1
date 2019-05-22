@@ -46,11 +46,29 @@
                                 <label for="writer"><spring:message code="message.board.insert.writer"/></label>
                                 <input class="form-control" id="writer" name="writer">
                             </div>
-                            <div class="form-group">
+                           <%--  <div class="form-group">
                                 <label for="content"><spring:message code="message.board.insert.content"/></label>
                                 <textarea class="form-control" id="content" name="content" rows="30"
                                           placeholder="내용을 입력해주세요" style="resize: none;"></textarea>
-                            </div>
+                            </div> --%>
+                            <!-- tools box -->
+				              <!-- <div class="pull-right box-tools">
+				                <button type="button" class="btn btn-info btn-sm" data-widget="collapse" data-toggle="tooltip"
+				                        title="Collapse">
+				                  <i class="fa fa-minus"></i></button>
+				                <button type="button" class="btn btn-info btn-sm" data-widget="remove" data-toggle="tooltip"
+				                        title="Remove">
+				                  <i class="fa fa-times"></i></button>
+				              </div> -->
+				              <!-- /. tools -->
+				            </div>
+				            <!-- /.box-header -->
+				            <div class="box-body pad">
+				              		<label for="content"><spring:message code="message.board.insert.content"/></label>
+				                    <textarea id="editor1" name="content" rows="10" cols="80" placeholder="내용을 입력해주세요">
+				                    </textarea>
+				            </div>
+                            <div class="box box-info">
                             <div class="form-group">
                                 <label for="upload"><spring:message code="message.board.insert.upload"/></label>
                                 <input class="form-control" type="file" name="uploadFile">

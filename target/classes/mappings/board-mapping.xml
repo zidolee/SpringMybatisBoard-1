@@ -116,13 +116,13 @@
  			 where rnum between #{pageStart} and #{perPageNum}
  			 <if test="searchCondition == 'TITLE'">
 			AND TITLE LIKE '%'||#{searchKeyword}||'%'
-		</if>
-		<if test="searchCondition == 'CONTENT'">
-			AND CONTENT LIKE '%'||#{searchKeyword}||'%'
-		</if>
-		<if test="searchCondition == 'WRITER'">
-			AND WRITER LIKE '%'||#{searchKeyword}||'%'
-		</if>
+			</if>
+			<if test="searchCondition == 'CONTENT'">
+				AND CONTENT LIKE '%'||#{searchKeyword}||'%'
+			</if>
+			<if test="searchCondition == 'WRITER'">
+				AND WRITER LIKE '%'||#{searchKeyword}||'%'
+			</if>
    		<!-- ]]> -->
    	</select>
 	

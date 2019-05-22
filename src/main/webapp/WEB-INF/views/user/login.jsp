@@ -56,8 +56,7 @@
         </div>
         <!-- /.social-auth-links -->
 
-        <a href="#">비밀번호 찾기</a><br>
-        <a href="${path}/user/register" class="text-center">회원가입</a>
+        <a href="joinPage.do" class="text-center"><spring:message code="message.board.list.join"/></a>
 
     </div>
     <!-- /.login-box-body -->
