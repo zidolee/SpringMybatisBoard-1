@@ -101,7 +101,7 @@ public class UserController {
 	
 	// 3. LogoutController
 	@RequestMapping("/logout.do")
-	public String handleRequest(HttpSession session) {
+	public String logout(HttpSession session) {
 		System.out.println("로그아웃 처리");
 
 		session.invalidate();
