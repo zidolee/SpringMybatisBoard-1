@@ -33,6 +33,7 @@
 
             <div class="col-lg-12">
                 <form role="form" id="writeForm" method="post" action="insertBoard.do" enctype="multipart/form-data">
+                <input class="form-control" type="hidden" id="writer" name="writer" value="${userId }">
                     <div class="box box-primary">
                         <div class="box-header with-border">
                             <h3 class="box-title"><spring:message code="message.board.insert.title"/></h3>
@@ -41,10 +42,6 @@
                             <div class="form-group">
                                 <label for="title"><spring:message code="message.board.insert.title"/></label>
                                 <input class="form-control" id="title" name="title" placeholder="제목을 입력해주세요">
-                            </div>
-                            <div class="form-group">
-                                <label for="writer"><spring:message code="message.board.insert.writer"/></label>
-                                <input class="form-control" id="writer" name="writer">
                             </div>
                            <%--  <div class="form-group">
                                 <label for="content"><spring:message code="message.board.insert.content"/></label>

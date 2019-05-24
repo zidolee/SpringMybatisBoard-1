@@ -32,7 +32,7 @@
         <section class="content container-fluid">
 
             <div class="col-lg-12">
-                <div class="box box-primary">
+                <div class="box box-info">
                     <div class="box-header with-border">
                         <h3 class="box-title">게시글 목록</h3>
                     </div>
@@ -47,7 +47,7 @@
 											</c:forEach>
 										</select>
 										<input name="searchKeyword" type="text">
-										<input type="submit" value="<spring:message code="message.board.list.search.condition.btn"/>" class="btn btn-primary">
+										<input type="submit" value="<spring:message code="message.board.list.search.condition.btn"/>" class="btn btn-info">
 									</td>
 								</tr>
 							</table>
@@ -74,7 +74,7 @@
                     </div>
                     <div class="box-footer">
                         <div class="pull-right">
-                            <a href="insertBoardForm.do" class="btn btn-primary"><spring:message code="message.board.list.link.insertBoard"/></a>
+                            <a href="insertBoardForm.do" class="btn btn-info"><spring:message code="message.board.list.link.insertBoard"/></a>
                         </div>
                          <div class="text-center">
 					        <ul class="pagination">

@@ -63,6 +63,13 @@ public class BoardController {
 		return conditionMap;
 	}
 	
+	@RequestMapping(value="/insertBoardForm.do", method=RequestMethod.GET)
+	public String insertBoardForm(HttpSession session) {
+		String userId  = (String)session.getAttribute("userId");
+		System.out.println(userId);
+		return "/article/insertBoard";
+	}
+	
 	@RequestMapping(value="/insertBoard.do")	//value=생략 가능
 	public String insertBoard(BoardVO vo, RedirectAttributes redirectAttributes) throws IOException {
 		System.out.println("글 등록 처리");
@@ -88,7 +95,8 @@ public class BoardController {
 	}
 	@RequestMapping(value="/modifyForm.do", method=RequestMethod.GET)
 	public String modifyForm(@RequestParam("seq") int seq,
-            @ModelAttribute("criteria") Criteria criteria,BoardVO vo, Model model) {
+            @ModelAttribute("criteria") Criteria criteria,BoardVO vo, Model model,HttpSession session) {
+		session.getAttribute("userId");
 		model.addAttribute("board", boardService.getBoard(seq));
 		return "/article/modify";
 	}
@@ -106,12 +114,6 @@ public class BoardController {
 	    redirectAttributes.addAttribute("perPageNum", criteria.getPerPageNum());
 		redirectAttributes.addFlashAttribute("msg", "modSuccess");
 		return "redirect:getBoardList.do";
-	}
-	
-	@RequestMapping("/insertBoardForm.do")
-	public String insertBoardForm() {
-
-		return "/article/insertBoard";
 	}
 	
 	@RequestMapping("/deleteBoard.do")
@@ -159,7 +161,6 @@ public class BoardController {
 	@RequestMapping(value="/getBoardList.do", method = RequestMethod.GET)
 	public String getBoardList(BoardVO vo, Model model, HttpSession session, Criteria criteria) throws Exception {
 		System.out.println("글 목록 검색 처리");
-		System.out.println(session.getAttribute("userName"));
 		String auth  = (String)session.getAttribute("userName");
 		
 		// Null Check

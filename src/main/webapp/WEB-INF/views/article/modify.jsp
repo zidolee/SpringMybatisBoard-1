@@ -74,7 +74,7 @@
                             </div>
                         </div>
                         <div class="box-footer">
-                            <button type="button" onclick="location.href='getBoardList.do?page=${criteria.page}&perPageNum=${criteria.perPageNum}'" class="btn btn-primary"><i class="fa fa-list"></i> <spring:message code="message.board.insert.boardList"/></button>
+                            <button type="button" onclick="location.href='getBoardList.do?page=${criteria.page}&perPageNum=${criteria.perPageNum}'" class="btn btn-info"><i class="fa fa-list"></i> <spring:message code="message.board.insert.boardList"/></button>
                             <div class="pull-right">
                                 <button type="reset" class="btn btn-warning"><i class="fa fa-reply"></i> 초기화</button>
                                 <input type="submit" class="btn btn-success" value="<spring:message code="message.board.insert.insertBtn"/>">

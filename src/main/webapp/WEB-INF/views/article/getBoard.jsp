@@ -36,7 +36,7 @@
         <section class="content container-fluid">
 
             <div class="col-lg-12">
-                <div class="box box-primary">
+                <div class="box box-info">
                     <div class="box-header with-border">
                         <h3 class="box-title"><spring:message code="message.board.detail.title" />: ${board.title}</h3>
                     </div>
@@ -58,10 +58,12 @@
                         <form role="form" method="post">
                             <input type="hidden" name="seq" value="${board.seq }">
                         </form>
-                        <button type="button" class="btn btn-primary listBtn" onclick="location.href='getBoardList.do?page=${criteria.page}&perPageNum=${criteria.perPageNum}'"><i class="fa fa-list"></i> <spring:message code="message.board.detail.link.boardList" /></button>
+                        <button type="button" class="btn btn-info listBtn" onclick="location.href='getBoardList.do?page=${criteria.page}&perPageNum=${criteria.perPageNum}'"><i class="fa fa-list"></i> <spring:message code="message.board.detail.link.boardList" /></button>
                         <div class="pull-right">
-                            <button type="button" onclick="location.href='modifyForm.do?page=${criteria.page}&perPageNum=${criteria.perPageNum}&seq=${board.seq }'" class="btn btn-warning modBtn"><i class="fa fa-edit"></i> <spring:message code="message.board.detail.updateBtn"/></button>
-                            <button type="button" onclick="location.href='deleteBoard.do?page=${criteria.page}&perPageNum=${criteria.perPageNum}&seq=${board.seq }'" class="btn btn-danger delBtn"><i class="fa fa-trash"></i> <spring:message code="message.board.detail.link.deleteBoard" /></button>
+                        <c:if test="${userId eq board.writer}">
+                        	<button type="button" onclick="location.href='modifyForm.do?page=${criteria.page}&perPageNum=${criteria.perPageNum}&seq=${board.seq }'" class="btn btn-warning modBtn"><i class="fa fa-edit"></i> <spring:message code="message.board.detail.updateBtn"/></button>
+                        	<button type="button" onclick="location.href='deleteBoard.do?page=${criteria.page}&perPageNum=${criteria.perPageNum}&seq=${board.seq }'" class="btn btn-danger delBtn"><i class="fa fa-trash"></i> <spring:message code="message.board.detail.link.deleteBoard" /></button>
+                        </c:if>
                         </div>
                     </div>
                 </div>
