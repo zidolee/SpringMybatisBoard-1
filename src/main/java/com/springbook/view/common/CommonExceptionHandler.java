@@ -1,7 +1,5 @@
 package com.springbook.view.common;
 
-import org.springframework.web.bind.annotation.ControllerAdvice;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.ModelAndView;
 
 //@ControllerAdvice("com.springbook.view")

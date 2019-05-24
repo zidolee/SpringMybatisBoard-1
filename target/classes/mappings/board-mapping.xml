@@ -12,15 +12,24 @@
 
 	<insert id="insertBoard">
 		<![CDATA[
-		INSERT INTO BOARD(SEQ, TITLE, WRITER, CONTENT)
-		VALUES((SELECT NVL(MAX(SEQ), 0) + 1 FROM BOARD), #{title},#{writer}, #{content})
+		INSERT INTO BOARD(SEQ
+		   				, TITLE
+		   				, WRITER
+		   				, CONTENT)
+				   VALUES((SELECT NVL(MAX(SEQ), 0) + 1 FROM BOARD)
+		    	 		 , #{title}
+		     			 , #{writer}
+		     			 , #{content})
 		]]>
 		
 	</insert>
 	
 	<update id="updateBoard">
 		<![CDATA[
-		UPDATE BOARD SET TITLE=#{title}, CONTENT=#{content} WHERE SEQ=#{seq}
+		UPDATE BOARD 
+		   SET TITLE=#{title}
+		   	 , CONTENT=#{content} 
+		 WHERE SEQ=#{seq}
 		]]>
 		
 	</update>
