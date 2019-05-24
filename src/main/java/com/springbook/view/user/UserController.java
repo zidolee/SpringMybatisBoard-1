@@ -1,5 +1,4 @@
 package com.springbook.view.user;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +15,7 @@ import com.springbook.biz.user.impl.UserDAO;
 
 @Controller
 public class UserController {
-
-	// 1. JoinConriller
+	// 1. JoinController
 	@Autowired
 	private UserService userService;
 	
@@ -26,41 +24,39 @@ public class UserController {
 		System.out.println(vo); 
 		int join = 0;
 		join = userService.insertUserVO(vo);
-		if(join == 1) {
+		if(join == 1) {						//회원가입 성공
 			return "redirect:home.do";
-		} else {
-			return "/user/join";
+		} else {		
+			return "/user/join";			//회원 가입 실패
 		}
 	}
-	
-	@RequestMapping(value="/joinPage.do")
+	//다국어 처리 설정 때문에 Controller를 거쳐야 함.
+	@RequestMapping(value="/joinPage.do", method=RequestMethod.GET)
 	public String joinPage() {
 		return "/user/join";
 	}
 	
+	// 회원 개인 정보 조회
 	@RequestMapping("/getUser.do")
 	public String getUser(UserVO vo, Model model, HttpSession session) {
-		System.out.println("개인정보 조회");
 		String auth = (String)session.getAttribute("userName");
-		
-		if(auth == null && auth.equals("")) {
+		if(auth == null && auth.equals("")) {	//유저 정보 세션에 없으면 로그인 창으로 이동
 			return "redirect:login.do";
 		} else {
-			model.addAttribute("user", userService.getUserVO(vo));
+			model.addAttribute("user", userService.getUserVO(vo));	//유저 정보 갖고 페이지 이동
 			return "/user/joinInfo";
 		}
 	}
 	
 	@RequestMapping(value="/updateUser.do", method=RequestMethod.POST)
-	public String updateUser(@ModelAttribute("user") UserVO vo, Model model, RedirectAttributes redirectAttributes, HttpSession session) {
+	public String updateUser(@ModelAttribute("user") UserVO vo, Model model
+			, RedirectAttributes redirectAttributes, HttpSession session) {
 		System.out.println("개인정보 수정");
 		userService.updateUser(vo);
-//		model.addAttribute("user", userService.getUserVO(vo));
 		redirectAttributes.addAttribute("id", session.getAttribute("userId") );
 		return "redirect:getUser.do";
 	}
 	
-	// 2.loginController
 	@RequestMapping("/deleteUser.do")
 	public String deletUser(UserVO vo) {
 		System.out.println("회원 탈퇴 처리");
@@ -68,7 +64,7 @@ public class UserController {
 		return "redirect:login.do";
 	}
 	
-	
+	// 2.loginController
 	@RequestMapping(value="/login.do", method=RequestMethod.GET)
 	public String loginView(@ModelAttribute("user") UserVO vo) {
 		System.out.println("로그인 화면으로 이동");
