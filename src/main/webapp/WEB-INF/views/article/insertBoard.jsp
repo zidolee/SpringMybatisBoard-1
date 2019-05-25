@@ -62,8 +62,7 @@
 				            <!-- /.box-header -->
 				            <div class="box-body pad">
 				              		<label for="content"><spring:message code="message.board.insert.content"/></label>
-				                    <textarea id="editor1" name="content" rows="10" cols="80" placeholder="내용을 입력해주세요">
-				                    </textarea>
+				                    <textarea id="editor1" name="content" rows="10" cols="80" placeholder="내용을 입력해주세요"></textarea>
 				            </div>
                             <div class="box box-info">
                             <div class="form-group">

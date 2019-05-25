@@ -88,6 +88,9 @@ public class BoardController {
 //
 //		        boardService.insertBoard(vo);
 //		    }
+		String temp = vo.getContent();
+		temp = temp.replaceAll("\r\n", "");
+		vo.setContent(temp);
 		boardService.insertBoard(vo);
 		redirectAttributes.addFlashAttribute("msg", "regSuccess");
 		return "redirect:getBoardList.do";
@@ -108,6 +111,9 @@ public class BoardController {
 		System.out.println("내용 : " + vo.getContent());
 		System.out.println("등록일 : " + vo.getRegDate());
 		System.out.println("조회수 : " + vo.getCnt());
+		String temp = vo.getContent();
+		temp = temp.replaceAll("\r\n", "");
+		vo.setContent(temp);
 		
 		boardService.updateBoard(vo);
 		redirectAttributes.addAttribute("page", criteria.getPage());

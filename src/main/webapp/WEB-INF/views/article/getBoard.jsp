@@ -41,9 +41,9 @@
                         <h3 class="box-title"><spring:message code="message.board.detail.title" />: ${board.title}</h3>
                     </div>
                     <div class="box-body" style="height: 700px">
-                       <label>
-                       	${board.content}
-                       </label>
+                       <div id="content">
+                       
+                       </div>
                     </div>
                     <div class="box-footer">
                         <div class="user-block">
@@ -89,6 +89,7 @@
     } else if (result == "delSuccess") {
         alert("게시글 삭제가 완료되었습니다.");
     }
+    document.getElementById('content').innerHTML = "${board.content}"
 </script>
 </body>
 </html>
