@@ -13,7 +13,7 @@
     </div>
 
     <div class="register-box-body">
-        <p class="login-box-msg">회원가입 페이지</p>
+        <p class="login-box-msg"><spring:message code="message.board.list.join"/></p>
 
         <form action="join.do" method="post">
             <div class="form-group has-feedback">

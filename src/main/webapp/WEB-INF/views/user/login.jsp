@@ -7,7 +7,7 @@
 <body class="hold-transition login-page">
 <div class="login-box">
     <div class="login-logo">
-        <a href="${path}/">
+        <a href="${path}/home.do">
             <b>ZidolS</b>-BOARD
         </a>
     </div>
@@ -29,19 +29,14 @@
             </div>
             <div class="row">
                 <div class="col-xs-8">
-                    <div class="checkbox icheck">
-                        <label>
-                            
-                        </label>
+                    <div>
                     </div>
                 </div>
-                <!-- /.col -->
                 <div class="col-xs-4">
                     <button type="submit" class="btn btn-primary btn-block btn-flat">
                         <i class="fa fa-sign-in"></i> <spring:message code="message.user.login.loginBtn"/>
                     </button>
                 </div>
-                <!-- /.col -->
             </div>
         </form>
 
