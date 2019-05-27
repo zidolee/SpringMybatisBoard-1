@@ -1,9 +1,14 @@
 package com.springbook.biz.board.impl;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.springbook.biz.board.BoardService;
 import com.springbook.biz.board.BoardVO;
@@ -61,4 +66,46 @@ public class BoardServiceImpl implements BoardService {
 	public int countArticles(Criteria criteria) throws Exception {
 	    return boardDAO.countArticles(criteria);
 	}
+	
+	@Override
+	public String fileUpload(BoardVO vo, HttpServletRequest request) {
+		MultipartFile uploadFile = vo.getUploadFile();
+		boolean isSuccess = false;
+//		Set pathSet = request.getSession().getServletContext().getResourcePaths("upload");
+		
+		String uploadPath = request.getSession().getServletContext().getRealPath("/upload/");
+
+//		String uploadPath = "/Users/zidol/Desktop/";
+		File dir = new File(uploadPath);
+
+		if (dir.isDirectory()) {
+			dir.mkdir();
+		}
+
+		String originalFileName = uploadFile.getOriginalFilename();
+		String saveFileName = originalFileName;
+
+		if (saveFileName != null && !saveFileName.equals("")) {
+			if (new File(uploadPath + saveFileName).exists()) {
+				saveFileName = System.currentTimeMillis()+ "_"  + saveFileName;
+			}
+			try {
+				uploadFile.transferTo(new File(uploadPath + saveFileName));
+				isSuccess = true;
+			} catch (IllegalStateException e) {
+
+				e.printStackTrace();
+
+				isSuccess = false;
+
+			} catch (IOException e) {
+
+				e.printStackTrace();
+
+				isSuccess = false;
+
+			}
+		}
+		return saveFileName; 
+	   }
 }

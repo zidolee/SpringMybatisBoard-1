@@ -52,6 +52,7 @@
                                 <a href="#">${board.writer }</a>
                             </span>
                             <span class="description"><fmt:formatDate pattern="yyyy-MM-dd a HH:mm" value="${board.regDate}"/></span>
+                            첨부 파일 : <a href="download.do?filename=${board.fileName }">${board.fileName }</a>
                         </div>
                     </div>
                     <div class="box-footer">

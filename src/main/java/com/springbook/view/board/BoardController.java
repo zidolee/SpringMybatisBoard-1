@@ -6,18 +6,20 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.springbook.biz.board.BoardService;
@@ -71,26 +73,18 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value="/insertBoard.do")	//value=생략 가능
-	public String insertBoard(BoardVO vo, RedirectAttributes redirectAttributes) throws IOException {
+	public String insertBoard(BoardVO vo, RedirectAttributes redirectAttributes, HttpServletRequest request) throws IOException {
 		System.out.println("글 등록 처리");
 		
-		//파일 업로드
-		MultipartFile uploadFile = vo.getUploadFile();
-		if(!uploadFile.isEmpty()) {
-			String fileName = uploadFile.getOriginalFilename();
-			uploadFile.transferTo(new File("C:/temp/" + fileName));
-		}
-//		 for (int i = 1; i <= 1000; i++) {
-//		     
-//		        vo.setTitle(i+ "번째 글 제목입니다...");
-//		        vo.setContent(i+ "번재 글 내용입니다...");
-//		        vo.setWriter("user0"+(i%10));
-//
-//		        boardService.insertBoard(vo);
-//		    }
+		String flag = null;
+		if(vo.getUploadFile() != null) {
+	        flag= boardService.fileUpload(vo, request);
+	    }
+		
 		String temp = vo.getContent();
 		temp = temp.replaceAll("\r\n", "");
 		vo.setContent(temp);
+		vo.setFileName(flag);
 		boardService.insertBoard(vo);
 		redirectAttributes.addFlashAttribute("msg", "regSuccess");
 		return "redirect:getBoardList.do";
@@ -105,12 +99,6 @@ public class BoardController {
 	}
 	@RequestMapping(value="/modify.do", method=RequestMethod.POST)
 	public String updateBoard(@ModelAttribute("board") BoardVO vo, Criteria criteria, RedirectAttributes redirectAttributes) {
-		System.out.println("번호 : " + vo.getSeq());
-		System.out.println("제목 : " + vo.getTitle());
-		System.out.println("작성자 : " + vo.getWriter());
-		System.out.println("내용 : " + vo.getContent());
-		System.out.println("등록일 : " + vo.getRegDate());
-		System.out.println("조회수 : " + vo.getCnt());
 		String temp = vo.getContent();
 		temp = temp.replaceAll("\r\n", "");
 		vo.setContent(temp);
@@ -186,4 +174,22 @@ public class BoardController {
 		}
 		
 	}
+	
+	
+	@RequestMapping("/download.do")
+    @ResponseBody
+    public byte[] downProcess(HttpServletResponse response, HttpServletRequest request,
+            @RequestParam String filename) throws IOException{
+		String uploadPath = request.getSession().getServletContext().getRealPath("/upload/");
+        File file = new File(uploadPath + filename);
+        byte[] bytes = FileCopyUtils.copyToByteArray(file);
+        
+        String fn = new String(file.getName().getBytes("utf-8"), "iso_8859_1");
+        System.out.println(fn);
+        
+        response.setHeader("Content-Disposition", "attachment;filename=\"" + fn + "\"");
+        response.setContentLength(bytes.length);
+        
+        return bytes;
+    }
 }

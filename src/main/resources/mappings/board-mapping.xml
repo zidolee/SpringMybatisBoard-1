@@ -8,6 +8,7 @@
 		<result property="content" column="CONTENT"/>
 		<result property="regDate" column="REGDATE"/>
 		<result property="cnt" column="CNT"/>
+		<result property="fileName" column="FILENAME"/>
 	</resultMap>
 
 	<insert id="insertBoard">
@@ -15,11 +16,13 @@
 		INSERT INTO BOARD(SEQ
 		   				, TITLE
 		   				, WRITER
-		   				, CONTENT)
+		   				, CONTENT
+		   				, FILENAME)
 				   VALUES((SELECT NVL(MAX(SEQ), 0) + 1 FROM BOARD)
 		    	 		 , #{title}
 		     			 , #{writer}
-		     			 , #{content})
+		     			 , #{content}
+		     			 , #{fileName})
 		]]>
 		
 	</insert>

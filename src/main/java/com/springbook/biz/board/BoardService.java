@@ -2,6 +2,8 @@ package com.springbook.biz.board;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 public interface BoardService {
 
 	//글 등록
@@ -22,4 +24,6 @@ public interface BoardService {
 	List<BoardVO> listCriteria(Criteria criteria) throws Exception;
 	
 	int countArticles(Criteria criteria) throws Exception;
+	
+	String fileUpload(BoardVO vo, HttpServletRequest request);
 }
