@@ -23,8 +23,7 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                게시판
-                <small><spring:message code="message.board.detail.mainTitle" /></small>
+                <spring:message code="message.board.detail.mainTitle" />
             </h1>
             <ol class="breadcrumb">
                 <li><i class="fa fa-edit"></i> article</li>
@@ -34,7 +33,6 @@
 
         <!-- Main content -->
         <section class="content container-fluid">
-
             <div class="col-lg-12">
                 <div class="box box-info">
                     <div class="box-header with-border">
@@ -42,7 +40,6 @@
                     </div>
                     <div class="box-body" style="height: 700px">
                        <div id="content">
-                       
                        </div>
                     </div>
                     <div class="box-footer">
@@ -52,7 +49,8 @@
                                 <a href="#">${board.writer }</a>
                             </span>
                             <span class="description"><fmt:formatDate pattern="yyyy-MM-dd a HH:mm" value="${board.regDate}"/></span>
-                            첨부 파일 : <a href="download.do?filename=${board.fileName }">${board.fileName }</a>
+                            <span><spring:message code="message.board.detail.attachments" /> : 
+                            <a href="download.do?filename=${board.fileName }">${board.fileName }</a></span>
                         </div>
                     </div>
                     <div class="box-footer">
@@ -60,16 +58,17 @@
                             <input type="hidden" name="seq" value="${board.seq }">
                         </form>
                         <button type="button" class="btn btn-info listBtn" onclick="location.href='getBoardList.do?page=${criteria.page}&perPageNum=${criteria.perPageNum}'"><i class="fa fa-list"></i> <spring:message code="message.board.detail.link.boardList" /></button>
-                        <div class="pull-right">
-                        <c:if test="${userId eq board.writer}">
-                        	<button type="button" onclick="location.href='modifyForm.do?page=${criteria.page}&perPageNum=${criteria.perPageNum}&seq=${board.seq }'" class="btn btn-warning modBtn"><i class="fa fa-edit"></i> <spring:message code="message.board.detail.updateBtn"/></button>
-                        	<button type="button" onclick="location.href='deleteBoard.do?page=${criteria.page}&perPageNum=${criteria.perPageNum}&seq=${board.seq }'" class="btn btn-danger delBtn"><i class="fa fa-trash"></i> <spring:message code="message.board.detail.link.deleteBoard" /></button>
-                        </c:if>
-                        </div>
+                    <div class="pull-right">
+                    <c:if test="${userId eq board.writer}">
+                    	<button type="button" onclick="location.href='modifyForm.do?page=${criteria.page}&perPageNum=${criteria.perPageNum}&seq=${board.seq }'" 
+                    	class="btn btn-warning modBtn"><i class="fa fa-edit"></i> <spring:message code="message.board.detail.updateBtn"/></button>
+                    	<button type="button" onclick="location.href='deleteBoard.do?page=${criteria.page}&perPageNum=${criteria.perPageNum}&seq=${board.seq }'" 
+                    	class="btn btn-danger delBtn"><i class="fa fa-trash"></i> <spring:message code="message.board.detail.link.deleteBoard" /></button>
+                    </c:if>
+                    </div>
                     </div>
                 </div>
             </div>
-
         </section>
         <!-- /.content -->
     </div>

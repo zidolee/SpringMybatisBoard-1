@@ -9,7 +9,7 @@
 <%-- Main Header --%>
 <header class="main-header">
     <!-- Logo -->
-    <a href="#" class="logo" style="background-color: #00c0ef">
+    <a href="/home.do" class="logo" style="background-color: #00c0ef">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>게</b>시판</span>
       <!-- logo for regular state and mobile devices -->
@@ -35,7 +35,6 @@
               <!-- User image -->
               <li class="user-header">
                 <img src="${path}/resources/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-
                 <p>
                 <c:choose>
 				    <c:when test="${not empty userId}">
@@ -48,22 +47,6 @@
                   
                 </p>
               </li>
-              <!-- Menu Body -->
-             <!--  <li class="user-body">
-                <div class="row">
-                  <div class="col-xs-4 text-center">
-                    <a href="#">Followers</a>
-                  </div>
-                  <div class="col-xs-4 text-center">
-                    <a href="#">Sales</a>
-                  </div>
-                  <div class="col-xs-4 text-center">
-                    <a href="#">Friends</a>
-                  </div>
-                </div>
-                /.row
-              </li> -->
-              <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">
                 <c:choose>

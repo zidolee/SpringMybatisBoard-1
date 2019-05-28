@@ -27,13 +27,11 @@
                 <li class="active"><a href="${path}/getBoardList.do"> list</a></li>
             </ol>
         </section>
-
         <!-- Main content -->
         <section class="content container-fluid">
-
             <div class="col-lg-12">
                 <form role="form" id="writeForm" method="post" action="insertBoard.do" enctype="multipart/form-data">
-                <input class="form-control" type="hidden" id="writer" name="writer" value="${userId }">
+               		<input class="form-control" type="hidden" id="writer" name="writer" value="${userId }">
                     <div class="box box-primary">
                         <div class="box-header with-border">
                             <h3 class="box-title"><spring:message code="message.board.insert.title"/></h3>
@@ -42,23 +40,8 @@
                             <div class="form-group">
                                 <label for="title"><spring:message code="message.board.insert.title"/></label>
                                 <input class="form-control" id="title" name="title" placeholder="제목을 입력해주세요">
-                            </div>
-                           <%--  <div class="form-group">
-                                <label for="content"><spring:message code="message.board.insert.content"/></label>
-                                <textarea class="form-control" id="content" name="content" rows="30"
-                                          placeholder="내용을 입력해주세요" style="resize: none;"></textarea>
-                            </div> --%>
-                            <!-- tools box -->
-				              <!-- <div class="pull-right box-tools">
-				                <button type="button" class="btn btn-info btn-sm" data-widget="collapse" data-toggle="tooltip"
-				                        title="Collapse">
-				                  <i class="fa fa-minus"></i></button>
-				                <button type="button" class="btn btn-info btn-sm" data-widget="remove" data-toggle="tooltip"
-				                        title="Remove">
-				                  <i class="fa fa-times"></i></button>
-				              </div> -->
-				              <!-- /. tools -->
-				            </div>
+                            </div>  
+				        </div>
 				            <!-- /.box-header -->
 				            <div class="box-body pad">
 				              		<label for="content"><spring:message code="message.board.insert.content"/></label>
@@ -71,7 +54,8 @@
                             </div>
                         </div>
                         <div class="box-footer">
-                            <button type="button" onclick="location.href='getBoardList.do'" class="btn btn-primary"><i class="fa fa-list"></i> <spring:message code="message.board.insert.boardList"/></button>
+                            <button type="button" onclick="location.href='getBoardList.do'" class="btn btn-primary"><i class="fa fa-list"></i>
+                            <spring:message code="message.board.insert.boardList"/></button>
                             <div class="pull-right">
                                 <button type="reset" class="btn btn-warning"><i class="fa fa-reply"></i> 초기화</button>
                                 <input type="submit" class="btn btn-success" value="<spring:message code="message.board.insert.insertBtn"/>">
