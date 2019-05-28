@@ -37,6 +37,7 @@ message.board.detail.updateBtn=글 수정
 message.board.detail.link.insertBoard=글 등록
 message.board.detail.link.deleteBoard=글 삭제
 message.board.detail.link.boardList=글 목록
+message.board.detail.attachments=첨부파일
 
 # insertBoard.jsp
 message.board.insert.mainTitle=글 등록

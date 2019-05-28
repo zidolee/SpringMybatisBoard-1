@@ -19,8 +19,7 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                게시판
-                <small>목록페이지</small>
+                             목록페이지
             </h1>
             <ol class="breadcrumb">
                 <li><i class="fa fa-edit"></i> article</li>
@@ -30,7 +29,6 @@
 
         <!-- Main content -->
         <section class="content container-fluid">
-
             <div class="col-lg-12">
                 <div class="box box-info">
                     <div class="box-header with-border">
@@ -79,17 +77,14 @@
                          <div class="text-center">
 					        <ul class="pagination">
 					            <c:if test="${pageMaker.prev}">
-					                <%-- <li><a href="getBoardList.do?page=${pageMaker.startPage - 1}">이전</a></li> --%>
 					                <li><a href="getBoardList.do${pageMaker.makeQuery(pageMaker.startPage - 1)}">이전</a></li>
 					            </c:if>
 					            <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
 					                <li <c:out value="${pageMaker.criteria.page == idx ? 'class=active' : ''}"/>>
-					                    <%-- <a href="getBoardList.do?page=${idx}">${idx}</a> --%>
 					                    <a href="getBoardList.do${pageMaker.makeQuery(idx)}">${idx}</a>
 					                </li>
 					            </c:forEach>
 					            <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-					                <%-- <li><a href="getBoardList.do?page=${pageMaker.endPage + 1}">다음</a></li> --%>
 					                <li><a href="getBoardList.do${pageMaker.makeQuery(pageMaker.endPage + 1)}">다음</a></li>
 					            </c:if>
 					        </ul>
