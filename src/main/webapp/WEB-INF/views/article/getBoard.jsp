@@ -50,7 +50,7 @@
                             </span>
                             <span class="description"><fmt:formatDate pattern="yyyy-MM-dd a HH:mm" value="${board.regDate}"/></span>
                             <span><spring:message code="message.board.detail.attachments" /> : 
-                            <a href="download.do?filename=${board.fileName }">${board.fileName }</a></span>
+                            <a href="download.do?originalFileName=${board.originalFileName }&seq=${board.seq}">${board.originalFileName }</a></span>
                         </div>
                     </div>
                     <div class="box-footer">

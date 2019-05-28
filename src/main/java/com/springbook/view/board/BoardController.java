@@ -76,15 +76,16 @@ public class BoardController {
 	public String insertBoard(BoardVO vo, RedirectAttributes redirectAttributes, HttpServletRequest request) throws IOException {
 		System.out.println("글 등록 처리");
 		
-		String flag = null;
+		Map<String, String> fileName = null;
 		if(vo.getUploadFile() != null) {
-	        flag= boardService.fileUpload(vo, request);
+	        fileName= boardService.fileUpload(vo, request);
 	    }
 		
 		String temp = vo.getContent();
 		temp = temp.replaceAll("\r\n", "");
 		vo.setContent(temp);
-		vo.setFileName(flag);
+		vo.setOriginalFileName(fileName.get("originalFileName"));
+		vo.setSaveFileName(fileName.get("saveFileName"));
 		boardService.insertBoard(vo);
 		redirectAttributes.addFlashAttribute("msg", "regSuccess");
 		return "redirect:getBoardList.do";
@@ -179,17 +180,19 @@ public class BoardController {
 	@RequestMapping("/download.do")
     @ResponseBody
     public byte[] downProcess(HttpServletResponse response, HttpServletRequest request,
-            @RequestParam String filename) throws IOException{
-		String uploadPath = request.getSession().getServletContext().getRealPath("/upload/");
-        File file = new File(uploadPath + filename);
-        byte[] bytes = FileCopyUtils.copyToByteArray(file);
-        
-        String fn = new String(file.getName().getBytes("utf-8"), "iso_8859_1");
-        System.out.println(fn);
-        
-        response.setHeader("Content-Disposition", "attachment;filename=\"" + fn + "\"");
-        response.setContentLength(bytes.length);
-        
+            @RequestParam String originalFileName,@RequestParam int seq) throws Exception{
+//		String uploadPath = request.getSession().getServletContext().getRealPath("/upload/");
+//        File file = new File(uploadPath + filename);
+//        byte[] bytes = FileCopyUtils.copyToByteArray(file);
+//        
+//        String fn = new String(file.getName().getBytes("utf-8"), "iso_8859_1");
+//        System.out.println(fn);
+//        response.setHeader("Content-Disposition", "attachment;filename=\"" + fn + "\"");
+//        response.setContentLength(bytes.length);
+		BoardVO vo = new BoardVO();
+		vo.setOriginalFileName(originalFileName);
+		vo.setSeq(seq);
+		byte[] bytes = boardService.fileDownload(vo, response, request);
         return bytes;
     }
 }

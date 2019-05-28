@@ -64,7 +64,6 @@ public class BoardDAOMybatis2 {
 		if(page <= 0) {
 			page = 1;
 		}
-		
 		page = (page - 1) * 10;
 		
 		return mybatis.selectList("BoardDAO.listPaging", page);
@@ -78,6 +77,10 @@ public class BoardDAOMybatis2 {
 
 	public int countArticles(Criteria criteria) throws Exception {
 	    return mybatis.selectOne("BoardDAO.countArticles", criteria);
+	}
+	
+	public BoardVO selectSaveFileName(BoardVO vo) throws Exception {
+	    return mybatis.selectOne("BoardDAO.getSaveFileName", vo);
 	}
 
 }

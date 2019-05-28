@@ -2,12 +2,16 @@ package com.springbook.biz.board.impl;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.springbook.biz.board.BoardService;
@@ -68,7 +72,7 @@ public class BoardServiceImpl implements BoardService {
 	}
 	
 	@Override
-	public String fileUpload(BoardVO vo, HttpServletRequest request) {
+	public Map<String, String>  fileUpload(BoardVO vo, HttpServletRequest request) {
 		MultipartFile uploadFile = vo.getUploadFile();
 		boolean isSuccess = false;
 //		Set pathSet = request.getSession().getServletContext().getResourcePaths("upload");
@@ -84,6 +88,7 @@ public class BoardServiceImpl implements BoardService {
 
 		String originalFileName = uploadFile.getOriginalFilename();
 		String saveFileName = originalFileName;
+		Map<String, String> fileName = new HashMap<String, String>();
 
 		if (saveFileName != null && !saveFileName.equals("")) {
 			if (new File(uploadPath + saveFileName).exists()) {
@@ -92,6 +97,8 @@ public class BoardServiceImpl implements BoardService {
 			try {
 				uploadFile.transferTo(new File(uploadPath + saveFileName));
 				isSuccess = true;
+				fileName.put("originalFileName", originalFileName);
+				fileName.put("saveFileName", saveFileName);
 			} catch (IllegalStateException e) {
 
 				e.printStackTrace();
@@ -106,6 +113,23 @@ public class BoardServiceImpl implements BoardService {
 
 			}
 		}
-		return saveFileName; 
+		return fileName; 
 	   }
+
+	@Override
+	public byte[] fileDownload(BoardVO vo, HttpServletResponse response, HttpServletRequest request) throws Exception {
+		String uploadPath = request.getSession().getServletContext().getRealPath("/upload/");
+		BoardVO saveFileName = selectFileName(vo);
+		String save_fileName = saveFileName.getSaveFileName();
+        File file = new File(uploadPath + save_fileName);
+        byte[] bytes = FileCopyUtils.copyToByteArray(file);
+        String fn = new String(vo.getOriginalFileName().getBytes("utf-8"), "iso_8859_1");
+        response.setHeader("Content-Disposition", "attachment;filename=\"" + fn + "\"");
+        response.setContentLength(bytes.length);
+		return bytes;
+	}
+	
+	public BoardVO selectFileName(BoardVO vo) throws Exception {
+		return boardDAO.selectSaveFileName(vo);
+	}
 }

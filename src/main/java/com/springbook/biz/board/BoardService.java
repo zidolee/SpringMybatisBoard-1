@@ -1,8 +1,11 @@
 package com.springbook.biz.board;
 
+import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 public interface BoardService {
 
@@ -25,5 +28,7 @@ public interface BoardService {
 	
 	int countArticles(Criteria criteria) throws Exception;
 	
-	String fileUpload(BoardVO vo, HttpServletRequest request);
+	Map<String, String> fileUpload(BoardVO vo, HttpServletRequest request);
+	
+	byte[] fileDownload(BoardVO vo, HttpServletResponse response, HttpServletRequest request) throws Exception;
 }
