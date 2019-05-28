@@ -54,16 +54,6 @@ public class BoardController {
 		List<BoardVO> boardList = boardService.getBoardList(vo);
 		return boardList;
 	}
-
-	// 검색 조건 목록 설정
-	@ModelAttribute("conditionMap")
-	public Map<String, String> searchCondtionMap() {
-		Map<String, String> conditionMap = new HashMap<String, String>();
-		conditionMap.put("제목", "TITLE");
-		conditionMap.put("내용", "CONTENT");
-		conditionMap.put("작성자", "WRITER");
-		return conditionMap;
-	}
 	
 	@RequestMapping(value="/insertBoardForm.do", method=RequestMethod.GET)
 	public String insertBoardForm(HttpSession session) {
@@ -98,8 +88,11 @@ public class BoardController {
 		model.addAttribute("board", boardService.getBoard(seq));
 		return "/article/modify";
 	}
+	
 	@RequestMapping(value="/modify.do", method=RequestMethod.POST)
 	public String updateBoard(@ModelAttribute("board") BoardVO vo, Criteria criteria, RedirectAttributes redirectAttributes) {
+		System.out.println(criteria.getPage());
+		System.out.println(criteria.getPerPageNum());
 		String temp = vo.getContent();
 		temp = temp.replaceAll("\r\n", "");
 		vo.setContent(temp);
@@ -152,6 +145,15 @@ public class BoardController {
 //		
 //	}
 	
+	// 검색 조건 목록 설정
+	@ModelAttribute("conditionMap")
+	public Map<String, String> searchCondtionMap() {
+		Map<String, String> conditionMap = new HashMap<String, String>();
+		conditionMap.put("제목", "TITLE");
+		conditionMap.put("내용", "CONTENT");
+		conditionMap.put("작성자", "WRITER");
+		return conditionMap;
+	}
 	
 	@RequestMapping(value="/getBoardList.do", method = RequestMethod.GET)
 	public String getBoardList(BoardVO vo, Model model, HttpSession session, Criteria criteria) throws Exception {
