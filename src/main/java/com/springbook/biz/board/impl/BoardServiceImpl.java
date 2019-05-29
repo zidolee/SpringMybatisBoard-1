@@ -21,21 +21,10 @@ import com.springbook.biz.board.Criteria;
 @Service("boardService")
 public class BoardServiceImpl implements BoardService {
 	@Autowired
-//	private BoardDAO boardDAO;
-//	private BoardDAOSpring boardDAO;
-//	private BoardDAOSpring2 boardDAO;
-//	private BoardDAOMybatis boardDAO;
 	private BoardDAOMybatis2 boardDAO;
 	
 	@Override//포인트컷 대상(메서드)
 	public void insertBoard(BoardVO vo) {
-//		after-throwing test
-//		if(vo.getSeq() == 0) {
-//			throw new IllegalArgumentException("0번 글은 등록 할 수 없습니다.");
-//		}
-//		if(vo.getWriter().equals("홍길동")) {
-//			throw new IllegalArgumentException("중복 에라");
-//		}
 		boardDAO.insertBoard(vo);
 	}
 
@@ -74,12 +63,9 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public Map<String, String>  fileUpload(BoardVO vo, HttpServletRequest request) {
 		MultipartFile uploadFile = vo.getUploadFile();
-		boolean isSuccess = false;
-//		Set pathSet = request.getSession().getServletContext().getResourcePaths("upload");
-		
+		boolean isSuccess = false;		
 		String uploadPath = request.getSession().getServletContext().getRealPath("/upload/");
 
-//		String uploadPath = "/Users/zidol/Desktop/";
 		File dir = new File(uploadPath);
 
 		if (dir.isDirectory()) {
@@ -110,7 +96,6 @@ public class BoardServiceImpl implements BoardService {
 				e.printStackTrace();
 
 				isSuccess = false;
-
 			}
 		}
 		return fileName; 

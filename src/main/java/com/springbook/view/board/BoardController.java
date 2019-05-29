@@ -1,6 +1,5 @@
 package com.springbook.view.board;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -13,7 +12,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -32,29 +30,8 @@ import com.springbook.biz.board.PageMaker;
 public class BoardController {
 	@Autowired
 	private BoardService boardService;
-
-//	XML방식으로 처리
-//	@RequestMapping("/dataTransform.do")
-//	@ResponseBody
-//	public BoardListVO dataTransform(BoardVO vo) {
-//		vo.setSearchCondition("TITLE");
-//		vo.setSearchKeyword("");
-//		List<BoardVO> boardList = boardService.getBoardList(vo);
-//		BoardListVO boardListVO = new BoardListVO();
-//		boardListVO.setBoardList(boardList);
-//		return boardListVO;
-//	}
 	
-//	JSON 방법으로 처리
-	@RequestMapping("/dataTransform.do")
-	@ResponseBody
-	public List<BoardVO> dataTransform(BoardVO vo) {
-		vo.setSearchCondition("TITLE");
-		vo.setSearchKeyword("");
-		List<BoardVO> boardList = boardService.getBoardList(vo);
-		return boardList;
-	}
-	
+	// 글 등록 화면 호출
 	@RequestMapping(value="/insertBoardForm.do", method=RequestMethod.GET)
 	public String insertBoardForm(HttpSession session) {
 		String userId  = (String)session.getAttribute("userId");
@@ -62,8 +39,10 @@ public class BoardController {
 		return "/article/insertBoard";
 	}
 	
+	// 글 등록 시  호출
 	@RequestMapping(value="/insertBoard.do")	//value=생략 가능
-	public String insertBoard(BoardVO vo, RedirectAttributes redirectAttributes, HttpServletRequest request) throws IOException {
+	public String insertBoard(BoardVO vo, RedirectAttributes redirectAttributes
+			, HttpServletRequest request) throws IOException {
 		System.out.println("글 등록 처리");
 		
 		Map<String, String> fileName = null;
@@ -81,18 +60,21 @@ public class BoardController {
 		return "redirect:getBoardList.do";
 		
 	}
+	
+	// 글 수정 화면 호출
 	@RequestMapping(value="/modifyForm.do", method=RequestMethod.GET)
 	public String modifyForm(@RequestParam("seq") int seq,
-            @ModelAttribute("criteria") Criteria criteria,BoardVO vo, Model model,HttpSession session) {
+            @ModelAttribute("criteria") Criteria criteria,BoardVO vo, 
+            Model model,HttpSession session) {
 		session.getAttribute("userId");
 		model.addAttribute("board", boardService.getBoard(seq));
 		return "/article/modify";
 	}
 	
+	// 글 수정 작업 호출
 	@RequestMapping(value="/modify.do", method=RequestMethod.POST)
-	public String updateBoard(@ModelAttribute("board") BoardVO vo, Criteria criteria, RedirectAttributes redirectAttributes) {
-		System.out.println(criteria.getPage());
-		System.out.println(criteria.getPerPageNum());
+	public String updateBoard(@ModelAttribute("board") BoardVO vo, Criteria criteria, 
+			RedirectAttributes redirectAttributes) {
 		String temp = vo.getContent();
 		temp = temp.replaceAll("\r\n", "");
 		vo.setContent(temp);
@@ -104,13 +86,11 @@ public class BoardController {
 		return "redirect:getBoardList.do";
 	}
 	
+	// 글 삭제 처리	
 	@RequestMapping("/deleteBoard.do")
-	public String deletBoard(@RequestParam("seq") int seq,
-            				 Criteria criteria,
-            				 BoardVO vo,
-            				 RedirectAttributes redirectAttributes) {
+	public String deletBoard(@RequestParam("seq") int seq, Criteria criteria,
+            				 BoardVO vo, RedirectAttributes redirectAttributes) {
 		System.out.println("글 삭제 처리");
-		
 		redirectAttributes.addAttribute("page", criteria.getPage());
 	    redirectAttributes.addAttribute("perPageNum", criteria.getPerPageNum());
 	    redirectAttributes.addFlashAttribute("msg", "delSuccess");
@@ -118,6 +98,7 @@ public class BoardController {
 		return "redirect:getBoardList.do";
 	}
 	
+	// 글 상세 보기
 	@RequestMapping(value="/getBoard.do", method = RequestMethod.GET)
 	public String getBoard(@RequestParam("seq") int seq,
             @ModelAttribute("criteria") Criteria criteria,BoardVO vo, Model model) {
@@ -126,26 +107,7 @@ public class BoardController {
 		return "article/getBoard";
 	}
 	
-//	원본
-//	@RequestMapping("/getBoardList.do")
-//	public String getBoardList(BoardVO vo, Model model, HttpSession session) {
-//		System.out.println("글 목록 검색 처리");
-//		System.out.println(session.getAttribute("userName"));
-//		String auth  = (String)session.getAttribute("userName");
-//		
-//		// Null Check
-//		if(vo.getSearchCondition() == null) vo.setSearchCondition("TITLE");
-//		if(vo.getSearchKeyword() == null) vo.setSearchKeyword("");
-//		if(auth == null && auth.equals("")) {
-//			return "redirect:login.do";
-//		} else {
-//			model.addAttribute("boardList", boardService.getBoardList(vo));
-//			return "getBoardList.jsp";
-//		}
-//		
-//	}
-	
-	// 검색 조건 목록 설정
+	// 검색 조건 목록 설정, @RequestMapping 보다 먼저 호출 됨
 	@ModelAttribute("conditionMap")
 	public Map<String, String> searchCondtionMap() {
 		Map<String, String> conditionMap = new HashMap<String, String>();
@@ -155,6 +117,7 @@ public class BoardController {
 		return conditionMap;
 	}
 	
+	// 글 목록 화면 호출
 	@RequestMapping(value="/getBoardList.do", method = RequestMethod.GET)
 	public String getBoardList(BoardVO vo, Model model, HttpSession session, Criteria criteria) throws Exception {
 		System.out.println("글 목록 검색 처리");
@@ -178,19 +141,12 @@ public class BoardController {
 		
 	}
 	
-	
+	//첨부 파일 다운로드 시 호출
 	@RequestMapping("/download.do")
     @ResponseBody
     public byte[] downProcess(HttpServletResponse response, HttpServletRequest request,
             @RequestParam String originalFileName,@RequestParam int seq) throws Exception{
-//		String uploadPath = request.getSession().getServletContext().getRealPath("/upload/");
-//        File file = new File(uploadPath + filename);
-//        byte[] bytes = FileCopyUtils.copyToByteArray(file);
-//        
-//        String fn = new String(file.getName().getBytes("utf-8"), "iso_8859_1");
-//        System.out.println(fn);
-//        response.setHeader("Content-Disposition", "attachment;filename=\"" + fn + "\"");
-//        response.setContentLength(bytes.length);
+		
 		BoardVO vo = new BoardVO();
 		vo.setOriginalFileName(originalFileName);
 		vo.setSeq(seq);
