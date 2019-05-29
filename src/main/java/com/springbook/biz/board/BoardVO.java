@@ -11,32 +11,16 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-//import lombok.Data;
-
-//@XmlAccessorType(XmlAccessType.FIELD)			//xml 데이터처리
-//@Data
 public class BoardVO {
-//	@XmlAttribute
 	private int seq;
 	private String title;
 	private String writer;
 	private String content;
 	private Date regDate;
 	private int cnt;
-//	@XmlTransient								//xml 데이터 처리 제외
 	private String searchCondition;
-//	@XmlTransient
 	private String searchKeyword;
-//	@XmlTransient
 	private MultipartFile uploadFile;
-	@Override
-	public String toString() {
-		return "BoardVO [seq=" + seq + ", title=" + title + ", writer=" + writer + ", content=" + content + ", regDate="
-				+ regDate + ", cnt=" + cnt + ", searchCondition=" + searchCondition + ", searchKeyword=" + searchKeyword
-				+ ", uploadFile=" + uploadFile + ", originalFileName=" + originalFileName + ", saveFileName="
-				+ saveFileName + "]";
-	}
-
 	private String originalFileName;
 	private String saveFileName;
 
