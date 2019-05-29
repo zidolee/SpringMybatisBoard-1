@@ -24,8 +24,8 @@
 		    	 		 , #{title}
 		     			 , #{writer}
 		     			 , #{content}
-		     			 , #{originalFileName}
-		     			 , #{saveFileName})
+		     			 , #{originalFileName,jdbcType=VARCHAR}
+		     			 , #{saveFileName,jdbcType=VARCHAR})
 		]]>
 		
 	</insert>
@@ -132,23 +132,31 @@
 	</select>
 	
 	<select id="listCriteria" resultMap="boardResult">
-	   <!--  <![CDATA[ -->
+	   <![CDATA[
 	    select * 
   			  from (select rownum as rnum, 
                            bo.* 
-                       from (select * from board order by seq desc) bo)
- 			 where rnum between #{pageStart} and #{perPageNum}
- 			 <if test="searchCondition == 'TITLE'">
-			AND TITLE LIKE '%'||#{searchKeyword}||'%'
+                       from (select * from board 
+ 			 
+   		 ]]>
+   		 <include refid="search"/>
+   		 <![CDATA[
+   		 order by seq desc) bo)
+   		 where rnum between #{pageStart} and #{perPageNum}
+   		 ]]>
+   	</select>
+   	
+   	<sql id="search">
+	<if test="searchCondition == 'TITLE'">
+			WHERE TITLE LIKE '%'||#{searchKeyword}||'%'
 			</if>
 			<if test="searchCondition == 'CONTENT'">
-				AND CONTENT LIKE '%'||#{searchKeyword}||'%'
+				WHERE CONTENT LIKE '%'||#{searchKeyword}||'%'
 			</if>
 			<if test="searchCondition == 'WRITER'">
-				AND WRITER LIKE '%'||#{searchKeyword}||'%'
+				WHERE WRITER LIKE '%'||#{searchKeyword}||'%'
 			</if>
-   		<!-- ]]> -->
-   	</select>
+	</sql>
 	
 	<select id="countArticles" resultType="int">
 	    <![CDATA[
@@ -157,6 +165,19 @@
 	    FROM board
 	    WHERE seq > 0
 	    ]]>
+	    <include refid="search2"/>
 	</select>
+	
+	<sql id="search2">
+	<if test="searchCondition == 'TITLE'">
+			AND TITLE LIKE '%'||#{searchKeyword}||'%'
+			</if>
+			<if test="searchCondition == 'CONTENT'">
+				AND CONTENT LIKE '%'||#{searchKeyword}||'%'
+			</if>
+			<if test="searchCondition == 'WRITER'">
+				AND WRITER LIKE '%'||#{searchKeyword}||'%'
+			</if>
+	</sql>
 
 </mapper>
