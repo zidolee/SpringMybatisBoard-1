@@ -8,7 +8,8 @@
 		<result property="content" column="CONTENT"/>
 		<result property="regDate" column="REGDATE"/>
 		<result property="cnt" column="CNT"/>
-		<result property="fileName" column="FILENAME"/>
+		<result property="originalFileName" column="ORIGINALFILENAME"/>
+		<result property="saveFileName" column="SAVEFILENAME"/>
 	</resultMap>
 
 	<insert id="insertBoard">
@@ -17,12 +18,14 @@
 		   				, TITLE
 		   				, WRITER
 		   				, CONTENT
-		   				, FILENAME)
+		   				, ORIGINALFILENAME
+		   				, SAVEFILENAME)
 				   VALUES((SELECT NVL(MAX(SEQ), 0) + 1 FROM BOARD)
 		    	 		 , #{title}
 		     			 , #{writer}
 		     			 , #{content}
-		     			 , #{fileName})
+		     			 , #{originalFileName}
+		     			 , #{saveFileName})
 		]]>
 		
 	</insert>
@@ -54,6 +57,15 @@
 	<select id="getBoard" resultType="board">
 		<![CDATA[
 		SELECT * FROM BOARD WHERE SEQ=#{seq}
+		]]>	
+	</select>
+	
+	<select id="getSaveFileName" resultType="board">
+		<![CDATA[
+		SELECT SAVEFILENAME 
+		  FROM BOARD 
+		 WHERE ORIGINALFILENAME=#{originalFileName}
+		   AND SEQ=#{seq}
 		]]>	
 	</select>
 	

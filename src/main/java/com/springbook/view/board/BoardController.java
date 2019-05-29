@@ -54,16 +54,6 @@ public class BoardController {
 		List<BoardVO> boardList = boardService.getBoardList(vo);
 		return boardList;
 	}
-
-	// 검색 조건 목록 설정
-	@ModelAttribute("conditionMap")
-	public Map<String, String> searchCondtionMap() {
-		Map<String, String> conditionMap = new HashMap<String, String>();
-		conditionMap.put("제목", "TITLE");
-		conditionMap.put("내용", "CONTENT");
-		conditionMap.put("작성자", "WRITER");
-		return conditionMap;
-	}
 	
 	@RequestMapping(value="/insertBoardForm.do", method=RequestMethod.GET)
 	public String insertBoardForm(HttpSession session) {
@@ -76,15 +66,16 @@ public class BoardController {
 	public String insertBoard(BoardVO vo, RedirectAttributes redirectAttributes, HttpServletRequest request) throws IOException {
 		System.out.println("글 등록 처리");
 		
-		String flag = null;
+		Map<String, String> fileName = null;
 		if(vo.getUploadFile() != null) {
-	        flag= boardService.fileUpload(vo, request);
+	        fileName= boardService.fileUpload(vo, request);
 	    }
 		
 		String temp = vo.getContent();
 		temp = temp.replaceAll("\r\n", "");
 		vo.setContent(temp);
-		vo.setFileName(flag);
+		vo.setOriginalFileName(fileName.get("originalFileName"));
+		vo.setSaveFileName(fileName.get("saveFileName"));
 		boardService.insertBoard(vo);
 		redirectAttributes.addFlashAttribute("msg", "regSuccess");
 		return "redirect:getBoardList.do";
@@ -97,8 +88,11 @@ public class BoardController {
 		model.addAttribute("board", boardService.getBoard(seq));
 		return "/article/modify";
 	}
+	
 	@RequestMapping(value="/modify.do", method=RequestMethod.POST)
 	public String updateBoard(@ModelAttribute("board") BoardVO vo, Criteria criteria, RedirectAttributes redirectAttributes) {
+		System.out.println(criteria.getPage());
+		System.out.println(criteria.getPerPageNum());
 		String temp = vo.getContent();
 		temp = temp.replaceAll("\r\n", "");
 		vo.setContent(temp);
@@ -151,6 +145,15 @@ public class BoardController {
 //		
 //	}
 	
+	// 검색 조건 목록 설정
+	@ModelAttribute("conditionMap")
+	public Map<String, String> searchCondtionMap() {
+		Map<String, String> conditionMap = new HashMap<String, String>();
+		conditionMap.put("제목", "TITLE");
+		conditionMap.put("내용", "CONTENT");
+		conditionMap.put("작성자", "WRITER");
+		return conditionMap;
+	}
 	
 	@RequestMapping(value="/getBoardList.do", method = RequestMethod.GET)
 	public String getBoardList(BoardVO vo, Model model, HttpSession session, Criteria criteria) throws Exception {
@@ -179,17 +182,19 @@ public class BoardController {
 	@RequestMapping("/download.do")
     @ResponseBody
     public byte[] downProcess(HttpServletResponse response, HttpServletRequest request,
-            @RequestParam String filename) throws IOException{
-		String uploadPath = request.getSession().getServletContext().getRealPath("/upload/");
-        File file = new File(uploadPath + filename);
-        byte[] bytes = FileCopyUtils.copyToByteArray(file);
-        
-        String fn = new String(file.getName().getBytes("utf-8"), "iso_8859_1");
-        System.out.println(fn);
-        
-        response.setHeader("Content-Disposition", "attachment;filename=\"" + fn + "\"");
-        response.setContentLength(bytes.length);
-        
+            @RequestParam String originalFileName,@RequestParam int seq) throws Exception{
+//		String uploadPath = request.getSession().getServletContext().getRealPath("/upload/");
+//        File file = new File(uploadPath + filename);
+//        byte[] bytes = FileCopyUtils.copyToByteArray(file);
+//        
+//        String fn = new String(file.getName().getBytes("utf-8"), "iso_8859_1");
+//        System.out.println(fn);
+//        response.setHeader("Content-Disposition", "attachment;filename=\"" + fn + "\"");
+//        response.setContentLength(bytes.length);
+		BoardVO vo = new BoardVO();
+		vo.setOriginalFileName(originalFileName);
+		vo.setSeq(seq);
+		byte[] bytes = boardService.fileDownload(vo, response, request);
         return bytes;
     }
 }
