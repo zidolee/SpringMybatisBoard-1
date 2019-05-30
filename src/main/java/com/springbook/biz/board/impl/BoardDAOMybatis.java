@@ -46,13 +46,13 @@ public class BoardDAOMybatis extends SqlSessionDaoSupport {
 	public List<BoardVO>  getBoardList(BoardVO vo) {
 		System.out.println("===> Mybatis JDBC로 getBoardList() 기능 처리");
 //		Object[] args = {vo.getSearchKeyword()};
-		if(vo.getSearchCondition().equals("TITLE")) {
-			return getSqlSession().selectList("BoardDAO.getBoardList_T", vo);
-		} else if(vo.getSearchCondition().equals("CONTENT")) {
-			return getSqlSession().selectList("BoardDAO.getBoardList_C", vo);
-		} else if(vo.getSearchCondition().equals("WRITER")) {
-			return getSqlSession().selectList("BoardDAO.getBoardList_W", vo);
-		}
+//		if(vo.getSearchCondition().equals("TITLE")) {
+//			return getSqlSession().selectList("BoardDAO.getBoardList_T", vo);
+//		} else if(vo.getSearchCondition().equals("CONTENT")) {
+//			return getSqlSession().selectList("BoardDAO.getBoardList_C", vo);
+//		} else if(vo.getSearchCondition().equals("WRITER")) {
+//			return getSqlSession().selectList("BoardDAO.getBoardList_W", vo);
+//		}
 		return null;
 	}
 }
