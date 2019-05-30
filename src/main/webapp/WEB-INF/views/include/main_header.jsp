@@ -9,7 +9,7 @@
 <%-- Main Header --%>
 <header class="main-header">
     <!-- Logo -->
-    <a href="/home.do" class="logo" style="background-color: #00c0ef">
+    <a href="${path}/home.do" class="logo" style="background-color: #00c0ef">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>게</b>시판</span>
       <!-- logo for regular state and mobile devices -->

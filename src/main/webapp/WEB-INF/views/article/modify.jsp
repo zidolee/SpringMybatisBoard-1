@@ -40,6 +40,8 @@
                		<input type="hidden" name="seq" value="${board.seq }">
 			        <input type="hidden" name="page" value="${criteria.page}">
 			        <input type="hidden" name="perPageNum" value="${criteria.perPageNum}">
+			        <input type="hidden" name="searchCondition" value="${criteria.searchCondition}">
+			        <input type="hidden" name="searchKeyword" value="${criteria.searchKeyword}">
                     <div class="box box-primary">
                         <div class="box-header with-border">
                             <h3 class="box-title"><spring:message code="message.board.insert.title"/></h3>
@@ -74,7 +76,7 @@
                             </div>
                         </div>
                         <div class="box-footer">
-                            <button type="button" onclick="location.href='getBoardList.do?page=${criteria.page}&perPageNum=${criteria.perPageNum}'" class="btn btn-info"><i class="fa fa-list"></i> <spring:message code="message.board.insert.boardList"/></button>
+                            <button type="button" onclick="location.href='getBoardList.do?page=${criteria.page}&perPageNum=${criteria.perPageNum}&searchCondition=${criteria.searchCondition}&searchKeyword=${criteria.searchKeyword}'" class="btn btn-info"><i class="fa fa-list"></i> <spring:message code="message.board.insert.boardList"/></button>
                             <div class="pull-right">
                                 <button type="reset" class="btn btn-warning"><i class="fa fa-reply"></i> 초기화</button>
                                 <input type="submit" class="btn btn-success" value="<spring:message code="message.board.insert.insertBtn"/>">

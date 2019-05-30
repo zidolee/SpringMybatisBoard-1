@@ -38,7 +38,7 @@
                     <div class="box-header with-border">
                         <h3 class="box-title"><spring:message code="message.board.detail.title" />: ${board.title}</h3>
                     </div>
-                    <div class="box-body" style="height: 700px">
+                    <div class="box-body" >
                        <div id="content">
                        </div>
                     </div>
@@ -56,13 +56,18 @@
                     <div class="box-footer">
                         <form role="form" method="post">
                             <input type="hidden" name="seq" value="${board.seq }">
+                            <input type="hidden" name="page" value="${criteria.page}">
+					        <input type="hidden" name="perPageNum" value="${criteria.perPageNum}">
+					        <input type="hidden" name="searchCondition" value="${criteria.searchCondition}">
+				        	<input type="hidden" name="searchKeyword" value="${criteria.searchKeyword}">
                         </form>
-                        <button type="button" class="btn btn-info listBtn" onclick="location.href='getBoardList.do?page=${criteria.page}&perPageNum=${criteria.perPageNum}'"><i class="fa fa-list"></i> <spring:message code="message.board.detail.link.boardList" /></button>
+                        <button type="button" class="btn btn-info listBtn" onclick="location.href='getBoardList.do?page=${criteria.page}&perPageNum=${criteria.perPageNum}&searchCondition=${criteria.searchCondition}&searchKeyword=${criteria.searchKeyword}'">
+                        <i class="fa fa-list"></i> <spring:message code="message.board.detail.link.boardList" /></button>
                     <div class="pull-right">
                     <c:if test="${userId eq board.writer}">
-                    	<button type="button" onclick="location.href='modifyForm.do?page=${criteria.page}&perPageNum=${criteria.perPageNum}&seq=${board.seq }'" 
+                    	<button type="button" onclick="location.href='modifyForm.do?page=${criteria.page}&perPageNum=${criteria.perPageNum}&seq=${board.seq }&searchCondition=${criteria.searchCondition}&searchKeyword=${criteria.searchKeyword}'" 
                     	class="btn btn-warning modBtn"><i class="fa fa-edit"></i> <spring:message code="message.board.detail.updateBtn"/></button>
-                    	<button type="button" onclick="location.href='deleteBoard.do?page=${criteria.page}&perPageNum=${criteria.perPageNum}&seq=${board.seq }'" 
+                    	<button type="button" onclick="location.href='deleteBoard.do?page=${criteria.page}&perPageNum=${criteria.perPageNum}&seq=${board.seq }&searchCondition=${criteria.searchCondition}&searchKeyword=${criteria.searchKeyword}'" 
                     	class="btn btn-danger delBtn"><i class="fa fa-trash"></i> <spring:message code="message.board.detail.link.deleteBoard" /></button>
                     </c:if>
                     </div>

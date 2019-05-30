@@ -48,13 +48,13 @@ public class BoardController {
 		Map<String, String> fileName = null;
 		if(vo.getUploadFile() != null) {
 	        fileName= boardService.fileUpload(vo, request);
+	        vo.setOriginalFileName(fileName.get("originalFileName"));
+			vo.setSaveFileName(fileName.get("saveFileName"));
 	    }
 		
 		String temp = vo.getContent();
 		temp = temp.replaceAll("\r\n", "");
 		vo.setContent(temp);
-		vo.setOriginalFileName(fileName.get("originalFileName"));
-		vo.setSaveFileName(fileName.get("saveFileName"));
 		boardService.insertBoard(vo);
 		redirectAttributes.addFlashAttribute("msg", "regSuccess");
 		return "redirect:getBoardList.do";
@@ -82,6 +82,8 @@ public class BoardController {
 		boardService.updateBoard(vo);
 		redirectAttributes.addAttribute("page", criteria.getPage());
 	    redirectAttributes.addAttribute("perPageNum", criteria.getPerPageNum());
+	    redirectAttributes.addAttribute("searchCondition", criteria.getSearchCondition());
+	    redirectAttributes.addAttribute("searchKeyword", criteria.getSearchKeyword());
 		redirectAttributes.addFlashAttribute("msg", "modSuccess");
 		return "redirect:getBoardList.do";
 	}
@@ -93,6 +95,8 @@ public class BoardController {
 		System.out.println("글 삭제 처리");
 		redirectAttributes.addAttribute("page", criteria.getPage());
 	    redirectAttributes.addAttribute("perPageNum", criteria.getPerPageNum());
+	    redirectAttributes.addAttribute("searchCondition", criteria.getSearchCondition());
+	    redirectAttributes.addAttribute("searchKeyword", criteria.getSearchKeyword());
 	    redirectAttributes.addFlashAttribute("msg", "delSuccess");
 		boardService.deleteBoard(seq);
 		return "redirect:getBoardList.do";
@@ -119,13 +123,13 @@ public class BoardController {
 	
 	// 글 목록 화면 호출
 	@RequestMapping(value="/getBoardList.do", method = RequestMethod.GET)
-	public String getBoardList(BoardVO vo, Model model, HttpSession session, Criteria criteria) throws Exception {
+	public String getBoardList(BoardVO vo, Model model, HttpSession session, 
+			@ModelAttribute("criteria")Criteria criteria) throws Exception {
 		System.out.println("글 목록 검색 처리");
 		String auth  = (String)session.getAttribute("userName");
-		
 		// Null Check
-		if(vo.getSearchCondition() == null) vo.setSearchCondition("TITLE");
-		if(vo.getSearchKeyword() == null) vo.setSearchKeyword("");
+		if(criteria.getSearchCondition() == null) criteria.setSearchCondition("TITLE");
+		if(criteria.getSearchKeyword() == null) criteria.setSearchKeyword("");
 		if(auth == null && auth.equals("")) {
 			return "redirect:login.do";
 		} else {
@@ -135,7 +139,6 @@ public class BoardController {
 		    
 			model.addAttribute("boardList", boardService.listCriteria(criteria));
 			model.addAttribute("pageMaker", pageMaker);
-			System.out.println(pageMaker.makeQuery(criteria.getPage()));
 			return "/article/getBoardList";
 		}
 		
