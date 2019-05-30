@@ -148,14 +148,14 @@
    	
    	<sql id="search">
 	<if test="searchCondition == 'TITLE'">
-			WHERE TITLE LIKE '%'||#{searchKeyword}||'%'
-			</if>
-			<if test="searchCondition == 'CONTENT'">
-				WHERE CONTENT LIKE '%'||#{searchKeyword}||'%'
-			</if>
-			<if test="searchCondition == 'WRITER'">
-				WHERE WRITER LIKE '%'||#{searchKeyword}||'%'
-			</if>
+		WHERE TITLE LIKE '%'||#{searchKeyword}||'%'
+	</if>
+	<if test="searchCondition == 'CONTENT'">
+		WHERE CONTENT LIKE '%'||#{searchKeyword}||'%'
+	</if>
+	<if test="searchCondition == 'WRITER'">
+		WHERE WRITER LIKE '%'||#{searchKeyword}||'%'
+	</if>
 	</sql>
 	
 	<select id="countArticles" resultType="int">

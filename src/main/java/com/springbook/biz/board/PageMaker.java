@@ -28,9 +28,9 @@ public class PageMaker {
     }
 
     private void calcData() {
-
+    	//페이지 마지막 번호 = Math.ceil(현재페이지 / 페이지 번호의 갯수) * 페이지 번호의 갯수
         endPage = (int) (Math.ceil(criteria.getPage() / (double) displayPageNum) * displayPageNum);
-
+        //시작 페이지 번호 = (끝 페이지 번호 - 페이지 번호의 갯수) + 1
         startPage = (endPage - displayPageNum) + 1;
 
         int tempEndPage = (int) (Math.ceil(totalCount / (double) 10));
@@ -38,13 +38,13 @@ public class PageMaker {
         if (endPage > tempEndPage) {
             endPage = tempEndPage;
         }
-
+        //이전, 다음 버튼 출력시 사용
         prev = startPage == 1 ? false : true;
 
         next = endPage * 10 >= totalCount ? false : true;
 
     }
-    
+    //uri생성 메서드
     public String makeQuery(int page) {
         UriComponents uriComponents = UriComponentsBuilder.newInstance()
                 .queryParam("page", page)

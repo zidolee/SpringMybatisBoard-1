@@ -18,8 +18,6 @@ public class BoardVO {
 	private String content;
 	private Date regDate;
 	private int cnt;
-	private String searchCondition;
-	private String searchKeyword;
 	private MultipartFile uploadFile;
 	private String originalFileName;
 	private String saveFileName;
@@ -86,22 +84,6 @@ public class BoardVO {
 
 	public void setCnt(int cnt) {
 		this.cnt = cnt;
-	}
-
-	public String getSearchCondition() {
-		return searchCondition;
-	}
-
-	public void setSearchCondition(String searchCondition) {
-		this.searchCondition = searchCondition;
-	}
-
-	public String getSearchKeyword() {
-		return searchKeyword;
-	}
-
-	public void setSearchKeyword(String searchKeyword) {
-		this.searchKeyword = searchKeyword;
 	}
 
 	public MultipartFile getUploadFile() {

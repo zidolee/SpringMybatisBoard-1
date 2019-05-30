@@ -60,14 +60,14 @@ public class BoardDAOMybatis2 {
 		return mybatis.selectList("BoardDAO.getBoardList", vo);
 	}
 	
-	public List<BoardVO> listPaging(int page) throws Exception {
-		if(page <= 0) {
-			page = 1;
-		}
-		page = (page - 1) * 10;
-		
-		return mybatis.selectList("BoardDAO.listPaging", page);
-	}
+//	public List<BoardVO> listPaging(int page) throws Exception {
+//		if(page <= 0) {
+//			page = 1;
+//		}
+//		page = (page - 1) * 10;
+//		
+//		return mybatis.selectList("BoardDAO.listPaging", page);
+//	}
 	
 	public List<BoardVO> listCriteria(Criteria criteria) throws Exception {
 		System.out.println("===> Mybatis2 JDBC 페이징 기능 처리");
