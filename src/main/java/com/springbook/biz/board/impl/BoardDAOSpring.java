@@ -62,14 +62,14 @@ public class BoardDAOSpring extends JdbcDaoSupport {
 	//글 목록조회
 	public List<BoardVO>  getBoardList(BoardVO vo) {
 		System.out.println("===> Spring JDBC로 getBoardList() 기능 처리");
-		Object[] args = {vo.getSearchKeyword()};
-		if(vo.getSearchCondition().equals("TITLE")) {
-			return getJdbcTemplate().query(BOARD_LIST_T, args, new BoardRowMapper());
-		} else if(vo.getSearchCondition().equals("CONTENT")) {
-			return getJdbcTemplate().query(BOARD_LIST_C, args,  new BoardRowMapper());
-		} else if(vo.getSearchCondition().equals("WRITER")) {
-			return getJdbcTemplate().query(BOARD_LIST_W, args, new BoardRowMapper2());
-		}
+//		Object[] args = {vo.getSearchKeyword()};
+//		if(vo.getSearchCondition().equals("TITLE")) {
+//			return getJdbcTemplate().query(BOARD_LIST_T, args, new BoardRowMapper());
+//		} else if(vo.getSearchCondition().equals("CONTENT")) {
+//			return getJdbcTemplate().query(BOARD_LIST_C, args,  new BoardRowMapper());
+//		} else if(vo.getSearchCondition().equals("WRITER")) {
+//			return getJdbcTemplate().query(BOARD_LIST_W, args, new BoardRowMapper2());
+//		}
 		return null;
 	}
 }

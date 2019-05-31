@@ -116,14 +116,14 @@ public class BoardDAO {
 		try {
 			conn = JDBCUtil.getConnection();
 			
-			if(vo.getSearchCondition().equals("TITLE")) {
-				stmt = conn.prepareStatement(BOARD_LIST_T);
-			} else if(vo.getSearchCondition().equals("CONTENT")) {
-				stmt = conn.prepareStatement(BOARD_LIST_C);
-			} else if(vo.getSearchCondition().equals("WRITER")) {
-				stmt = conn.prepareStatement(BOARD_LIST_W);
-			}
-			stmt.setString(1, vo.getSearchKeyword());
+//			if(vo.getSearchCondition().equals("TITLE")) {
+//				stmt = conn.prepareStatement(BOARD_LIST_T);
+//			} else if(vo.getSearchCondition().equals("CONTENT")) {
+//				stmt = conn.prepareStatement(BOARD_LIST_C);
+//			} else if(vo.getSearchCondition().equals("WRITER")) {
+//				stmt = conn.prepareStatement(BOARD_LIST_W);
+//			}
+//			stmt.setString(1, vo.getSearchKeyword());
 			rs = stmt.executeQuery();
 			
 			while(rs.next()) {
