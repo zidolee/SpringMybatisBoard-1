@@ -133,16 +133,15 @@
 	
 	<select id="listCriteria" resultMap="boardResult">
 	   <![CDATA[
-	    select * 
-  			  from (select rownum as rnum, 
-                           bo.* 
-                       from (select * from board 
- 			 
+	    SELECT * 
+  			  FROM (SELECT ROWNUM AS RNUM, 
+                           BO.* 
+                       FROM (SELECT * FROM BOARD 
    		 ]]>
    		 <include refid="search"/>
    		 <![CDATA[
-   		 order by seq desc) bo)
-   		 where rnum between #{pageStart} and #{perPageNum}
+   		 ORDER BY SEQ DESC) BO)
+   		 WHERE RNUM BETWEEN #{pageStart} and #{perPageNum}
    		 ]]>
    	</select>
    	
