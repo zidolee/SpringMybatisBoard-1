@@ -40,45 +40,18 @@ public class BoardDAOMybatis2 {
 		mybatis.update("BoardDAO.updateHitCnt", seq);
 		return (BoardVO) mybatis.selectOne("BoardDAO.getBoard", seq);
 	}
-		
-	//글 목록조회
-//	public List<BoardVO> getBoardList(BoardVO vo) {
-//		System.out.println("===> Mybatis2 JDBC로 getBoardList() 기능 처리");
-//		if(vo.getSearchCondition().equals("TITLE")) {
-//			return mybatis.selectList("BoardDAO.getBoardList_T", vo);
-//		} else if(vo.getSearchCondition().equals("CONTENT")) {
-//			return mybatis.selectList("BoardDAO.getBoardList_C", vo);
-//		} else if(vo.getSearchCondition().equals("WRITER")) {
-//			return mybatis.selectList("BoardDAO.getBoardList_W", vo);
-//		}
-//		return null;
-//	}
 	
-	// Dynamic SQL 사용 할때
-	public List<BoardVO> getBoardList(BoardVO vo) {
-		System.out.println("===> Mybatis2 JDBC로 getBoardList() 기능 처리");
-		return mybatis.selectList("BoardDAO.getBoardList", vo);
-	}
-	
-//	public List<BoardVO> listPaging(int page) throws Exception {
-//		if(page <= 0) {
-//			page = 1;
-//		}
-//		page = (page - 1) * 10;
-//		
-//		return mybatis.selectList("BoardDAO.listPaging", page);
-//	}
-	
+	// 게시판 리스트 조
 	public List<BoardVO> listCriteria(Criteria criteria) throws Exception {
 		System.out.println("===> Mybatis2 JDBC 페이징 기능 처리");
 	    return mybatis.selectList("BoardDAO.listCriteria", criteria);
 	}
 	
-
+	// 게시판 글 총 수
 	public int countArticles(Criteria criteria) throws Exception {
 	    return mybatis.selectOne("BoardDAO.countArticles", criteria);
 	}
-	
+	// 업로드 한 파일 이름 조회 
 	public BoardVO selectSaveFileName(BoardVO vo) throws Exception {
 	    return mybatis.selectOne("BoardDAO.getSaveFileName", vo);
 	}

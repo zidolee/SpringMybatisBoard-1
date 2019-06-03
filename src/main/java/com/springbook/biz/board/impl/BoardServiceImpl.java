@@ -44,14 +44,7 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public List<BoardVO> getBoardList(BoardVO vo) {
-		return boardDAO.getBoardList(vo);
-	}
-
-	@Override
 	public List<BoardVO> listCriteria(Criteria criteria) throws Exception {
-		System.out.println(criteria.getPageStart());
-		System.out.println(criteria.getPerPageNum());
 	    return boardDAO.listCriteria(criteria);
 	}
 	
