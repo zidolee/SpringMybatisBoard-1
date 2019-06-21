@@ -59,33 +59,37 @@ public class BoardDAOMybatis2 {
 	    return mybatis.selectOne("BoardDAO.getSaveFileName", vo);
 	}
 	
-
+	
     public List<ReplyVO> list(int articleNo) throws Exception {
         return mybatis.selectList("ReplyDAO.list", articleNo);
     }
 
-
+    //댓글 추가
     public void create(ReplyVO replyVO) throws Exception {
     	mybatis.insert("ReplyDAO.create", replyVO);
     }
-
+   
+    //댓글 수정
     public void update(ReplyVO replyVO) throws Exception {
     	mybatis.update("ReplyDAO.update", replyVO);
     }
-
+    
+    //댓글 삭제
     public void delete(Integer replyNo) throws Exception {
     	mybatis.delete("ReplyDAO.delete", replyNo);
     }
     
-    
+    //댓글 수 조회
     public int countReplies(Integer articleNo) throws Exception {
         return mybatis.selectOne("ReplyDAO.countReplies", articleNo);
     }
-
+    
+    //댓글의 게시글 번호 조회
     public int getArticleNo(Integer replyNo) throws Exception {
         return mybatis.selectOne("ReplyDAO.getArticleNo", replyNo);
     }
     
+    //댓글 전체 조회 (페이징)
     public List<ReplyVO> listPaging(Integer articleNo, Criteria criteria) throws Exception {
 
         Map<String, Object> paramMap = new HashMap<>();
