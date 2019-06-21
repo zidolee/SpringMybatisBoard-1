@@ -13,7 +13,7 @@
         <div class="user-panel">
             <c:if test="${empty userId}">
                 <div class="pull-left image">
-                    <img src="${path}/resources/user/default-user.png" class="img-circle" alt="User Image">
+                    <img src="${path}/user/default-user.png" class="img-circle" alt="User Image">
                 </div>
                 <div class="pull-left info">
                     <p>Guest</p>
@@ -23,7 +23,7 @@
             </c:if>
             <c:if test="${not empty userId}">
                 <div class="pull-left image">
-                    <img src="${path}/resources/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                    <img src="${path}/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
                 </div>
                 <div class="pull-left info">
                     <p>${login.userName}</p>

@@ -1,6 +1,8 @@
 package com.springbook.biz.board.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.springbook.biz.board.BoardVO;
 import com.springbook.biz.board.Criteria;
+import com.springbook.biz.board.ReplyVO;
 
 @Repository
 public class BoardDAOMybatis2 {
@@ -55,6 +58,41 @@ public class BoardDAOMybatis2 {
 	public BoardVO selectSaveFileName(BoardVO vo) throws Exception {
 	    return mybatis.selectOne("BoardDAO.getSaveFileName", vo);
 	}
+	
 
+    public List<ReplyVO> list(int articleNo) throws Exception {
+        return mybatis.selectList("ReplyDAO.list", articleNo);
+    }
+
+
+    public void create(ReplyVO replyVO) throws Exception {
+    	mybatis.insert("ReplyDAO.create", replyVO);
+    }
+
+    public void update(ReplyVO replyVO) throws Exception {
+    	mybatis.update("ReplyDAO.update", replyVO);
+    }
+
+    public void delete(Integer replyNo) throws Exception {
+    	mybatis.delete("ReplyDAO.delete", replyNo);
+    }
+    
+    
+    public int countReplies(Integer articleNo) throws Exception {
+        return mybatis.selectOne("ReplyDAO.countReplies", articleNo);
+    }
+
+    public int getArticleNo(Integer replyNo) throws Exception {
+        return mybatis.selectOne("ReplyDAO.getArticleNo", replyNo);
+    }
+    
+    public List<ReplyVO> listPaging(Integer articleNo, Criteria criteria) throws Exception {
+
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("articleNo", articleNo);
+        paramMap.put("criteria", criteria);
+        return mybatis.selectList("ReplyDAO.listPaging", paramMap);
+    }
+      
 }
 

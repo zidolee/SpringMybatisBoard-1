@@ -3,34 +3,51 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 
-<c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
+<%-- <c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
 <!-- jQuery 3 -->
-<script src="${path}/resources/bower_components/jquery/dist/jquery.min.js"></script>
+<script src="${path}/bower_components/jquery/dist/jquery.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
-<script src="${path}/resources/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="${path}/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- FastClick -->
-<script src="${path}/resources/bower_components/fastclick/lib/fastclick.js"></script>
+<script src="${path}/bower_components/fastclick/lib/fastclick.js"></script>
 <!-- AdminLTE App -->
-<script src="${path}/resources/dist/js/adminlte.min.js"></script>
+<script src="${path}/dist/js/adminlte.min.js"></script>
 <!-- Sparkline -->
-<script src="${path}/resources/bower_components/jquery-sparkline/dist/jquery.sparkline.min.js"></script>
+<script src="${path}/bower_components/jquery-sparkline/dist/jquery.sparkline.min.js"></script>
 <!-- jvectormap  -->
-<script src="${path}/resources/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
+<script src="${path}/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
 <script src="${path}/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
 <!-- SlimScroll -->
-<script src="${path}/resources/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+<script src="${path}/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 <!-- ChartJS -->
-<script src="${path}/resourcesresources/bower_components/chart.js/Chart.js"></script>
+<script src="${path}/bower_components/chart.js/Chart.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="${path}/resources/dist/js/pages/dashboard2.js"></script>
+<script src="${path}/dist/js/pages/dashboard2.js"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="${path}/resources/dist/js/demo.js"></script>
+<script src="${path}/dist/js/demo.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script> --%>
+
+
+<!-- jQuery 3 -->
+<script src="${path}/bower_components/jquery/dist/jquery.min.js"></script>
+<!-- Bootstrap 3.3.7 -->
+<script src="${path}/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- iCheck -->
+<script src="${path}/plugins/iCheck/icheck.min.js"></script>
+<!-- AdminLTE App -->
+<script src="${path}/dist/js/adminlte.min.js"></script>
+<%--Handlebars--%>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
+<%--fileUpload--%>
+<script src="${path}/bower_components/fileupload/js/jasny-bootstrap.min.js"></script>
+<%--lightbox--%>
+<script src="${path}/bower_components/lightbox/js/lightbox.js"></script>
 
 
 <!-- CK Editor -->
-<script src="${path}/resources/bower_components/ckeditor/ckeditor.js"></script>
+<script src="${path}/bower_components/ckeditor/ckeditor.js"></script>
 <!-- Bootstrap WYSIHTML5 -->
-<script src="${path}/resources/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+<%-- <script src="${path}/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script> --%>
 <script>
   $(function () {
     // Replace the <textarea id="editor1"> with a CKEditor
