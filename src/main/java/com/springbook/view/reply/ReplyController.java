@@ -91,6 +91,7 @@ public class ReplyController {
         return entity;
     }
     
+    //댓글 리스트(페이징)
     @RequestMapping(value = "/{articleNo}/{page}", method = RequestMethod.GET)
     public ResponseEntity<Map<String, Object>> listPaging(@PathVariable("articleNo") Integer articleNo,
                                                           @PathVariable("page") Integer page) {
